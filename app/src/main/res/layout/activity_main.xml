@@ -109,7 +109,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_margin="32dp"
-        android:onClick="reset"
+        android:onClick="resetBtn"
         android:text="Reset" />
 
     <TextView
