@@ -19,45 +19,48 @@
 
 
             <TextView
+                style="@style/PlayerNameText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                style="@style/PlayerNameText"
                 android:padding="16dp"
                 android:text="Player A" />
 
             <TextView
                 android:id="@+id/player_a_score"
+                style="@style/ScoreText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                style="@style/ScoreText"
                 android:paddingBottom="24dp"
                 android:text="0" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="24dp"
-                android:layout_marginBottom="8dp"
                 android:onClick="addPointA"
                 android:text="Point" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="24dp"
-                android:layout_marginBottom="8dp"
                 android:onClick="plus1A"
-                android:text="Fault" />
+                android:text="Fault"
+                android:theme="@style/RedBtn" />
         </LinearLayout>
+
         <View
             android:layout_width="1dp"
+            android:layout_height="match_parent"
             android:layout_marginTop="16dp"
-            android:background="@android:color/darker_gray"
-            android:layout_height="match_parent" />
+            android:background="@android:color/darker_gray" />
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -65,39 +68,40 @@
             android:orientation="vertical">
 
             <TextView
+                style="@style/PlayerNameText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                style="@style/PlayerNameText"
                 android:padding="16dp"
                 android:text="Player B" />
 
             <TextView
                 android:id="@+id/player_b_score"
+                style="@style/ScoreText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                style="@style/ScoreText"
                 android:paddingBottom="24dp"
                 android:text="0" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="24dp"
-                android:layout_marginBottom="8dp"
                 android:onClick="addPointB"
                 android:text="Point" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="24dp"
-                android:layout_marginBottom="8dp"
                 android:onClick="plus1B"
-                android:text="Fault" />
+                android:text="Fault"
+                android:theme="@style/RedBtn" />
 
         </LinearLayout>
     </LinearLayout>
@@ -114,20 +118,21 @@
 
     <TextView
         android:id="@+id/player_b_set"
+        style="@style/ScoreText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_above="@id/reset_btn"
-        style="@style/ScoreText"
+        android:layout_centerHorizontal="true"
         android:text="0" />
+
     <TextView
         android:id="@+id/player_a_set"
+        style="@style/ScoreText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_centerHorizontal="true"
         android:layout_above="@id/player_b_set"
-        style="@style/ScoreText"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
         android:paddingBottom="4dp"
         android:text="0" />
 

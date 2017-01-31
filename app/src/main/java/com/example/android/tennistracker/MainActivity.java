@@ -14,10 +14,8 @@ public class MainActivity extends AppCompatActivity {
     int pointsPlayerB = 0;
     int setPointsPlayerA = 0;
     int setPointsPlayerB = 0;
-    int[] setPlayerA = {0, 0, 0, 0, 0};
-    int[] setPlayerB = {0, 0, 0, 0, 0};
-    ArrayList<Integer> setPlayerAA = new ArrayList<>();
-    ArrayList<Integer> setPlayerBB = new ArrayList<>();
+    ArrayList<Integer> setPlayerA = new ArrayList<>();
+    ArrayList<Integer> setPlayerB = new ArrayList<>();
     int setNum = 0;
 
     @Override
@@ -25,12 +23,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setPlayerAA.add(0);
-        setPlayerBB.add(0);
+        setPlayerA.add(0);
+        setPlayerB.add(0);
         displayForPlayerA(pointsPlayerA);
-        displaySetForPlayerA(setPlayerAA);
+        displaySetForPlayerA(setPlayerA);
         displayForPlayerB(pointsPlayerB);
-        displaySetForPlayerB(setPlayerBB);
+        displaySetForPlayerB(setPlayerB);
     }
 
     /**
@@ -38,7 +36,11 @@ public class MainActivity extends AppCompatActivity {
      */
     public void displayForPlayerA(int points) {
         TextView scoreView = (TextView) findViewById(R.id.player_a_score);
-        scoreView.setText(String.valueOf(points));
+        if (points > 40) {
+            scoreView.setText(String.valueOf("Adv"));
+        } else {
+            scoreView.setText(String.valueOf(points));
+        }
     }
 
     /**
@@ -51,11 +53,22 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Adding points to player A and then prints out the score.
+     * If its 40-40 it's deuce and a player need to win with 2 clear points.
      */
     public void addPointA(View v) {
         if (pointsPlayerA == 30) {
             pointsPlayerA += 10;
         } else if (pointsPlayerA == 40) {
+            if (pointsPlayerB > 40) {
+                pointsPlayerB -= 15;
+            } else if (pointsPlayerB == 40) {
+                pointsPlayerA += 15;
+            } else {
+                pointsPlayerA = 0;
+                pointsPlayerB = 0;
+                addGamePointA();
+            }
+        } else if (pointsPlayerA == 55) {
             pointsPlayerA = 0;
             pointsPlayerB = 0;
             addGamePointA();
@@ -70,18 +83,18 @@ public class MainActivity extends AppCompatActivity {
      * Adding game points to player A. Also automatically starts a new set when reached 6.
      */
     private void addGamePointA() {
-        Integer value = setPlayerAA.get(setNum);
+        Integer value = setPlayerA.get(setNum);
         value++;
-        setPlayerAA.set(setNum, value);
+        setPlayerA.set(setNum, value);
 
         if (value >= 6) {
             setNum++;
             setPointsPlayerA++;
 
             if (setPointsPlayerA < 3) {
-                setPlayerAA.add(setNum, 0);
-                setPlayerBB.add(setNum, 0);
-                displaySetForPlayerB(setPlayerBB);
+                setPlayerA.add(setNum, 0);
+                setPlayerB.add(setNum, 0);
+                displaySetForPlayerB(setPlayerB);
             } else {
                 //playerAWins();
                 Toast.makeText(getApplicationContext(), "Player A Wins!", Toast.LENGTH_LONG).show();
@@ -91,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        displaySetForPlayerA(setPlayerAA);
+        displaySetForPlayerA(setPlayerA);
     }
 
     public void plus1A(View v) {
@@ -104,7 +117,11 @@ public class MainActivity extends AppCompatActivity {
      */
     public void displayForPlayerB(int points) {
         TextView scoreView = (TextView) findViewById(R.id.player_b_score);
-        scoreView.setText(String.valueOf(points));
+        if (points > 40) {
+            scoreView.setText(String.valueOf("Adv"));
+        } else {
+            scoreView.setText(String.valueOf(points));
+        }
     }
 
     /**
@@ -117,11 +134,22 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Adding points to player B and then prints out the score.
+     * If its 40-40 it's deuce and a player need to win with 2 clear points.
      */
     public void addPointB(View v) {
         if (pointsPlayerB == 30) {
             pointsPlayerB += 10;
         } else if (pointsPlayerB == 40) {
+            if (pointsPlayerA > 40) {
+                pointsPlayerA -= 15;
+            } else if (pointsPlayerA == 40) {
+                pointsPlayerB += 15;
+            } else {
+                pointsPlayerB = 0;
+                pointsPlayerA = 0;
+                addGamePointB();
+            }
+        } else if (pointsPlayerB == 55) {
             pointsPlayerB = 0;
             pointsPlayerA = 0;
             addGamePointB();
@@ -136,9 +164,9 @@ public class MainActivity extends AppCompatActivity {
      * Adding game points to player B. Also automatically starts a new set when reached 6.
      */
     private void addGamePointB() {
-        Integer value = setPlayerBB.get(setNum);
+        Integer value = setPlayerB.get(setNum);
         value++;
-        setPlayerBB.set(setNum, value);
+        setPlayerB.set(setNum, value);
 
 
         if (value >= 6) {
@@ -146,9 +174,9 @@ public class MainActivity extends AppCompatActivity {
             setPointsPlayerB++;
 
             if (setPointsPlayerB < 3) {
-                setPlayerBB.add(setNum, 0);
-                setPlayerAA.add(setNum, 0);
-                displaySetForPlayerA(setPlayerAA);
+                setPlayerB.add(setNum, 0);
+                setPlayerA.add(setNum, 0);
+                displaySetForPlayerA(setPlayerA);
             } else {
                 //playerBWins();
                 Toast.makeText(getApplicationContext(), "Player B Wins!", Toast.LENGTH_LONG).show();
@@ -156,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        displaySetForPlayerB(setPlayerBB);
+        displaySetForPlayerB(setPlayerB);
     }
 
     public void plus1B(View v) {
@@ -177,13 +205,13 @@ public class MainActivity extends AppCompatActivity {
         setPointsPlayerA = 0;
         setPointsPlayerB = 0;
         setNum = 0;
-        setPlayerAA.clear();
-        setPlayerAA.add(0);
-        setPlayerBB.clear();
-        setPlayerBB.add(0);
+        setPlayerA.clear();
+        setPlayerA.add(0);
+        setPlayerB.clear();
+        setPlayerB.add(0);
         displayForPlayerA(pointsPlayerA);
-        displaySetForPlayerA(setPlayerAA);
+        displaySetForPlayerA(setPlayerA);
         displayForPlayerB(pointsPlayerB);
-        displaySetForPlayerB(setPlayerBB);
+        displaySetForPlayerB(setPlayerB);
     }
 }
