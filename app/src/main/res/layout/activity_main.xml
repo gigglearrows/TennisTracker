@@ -50,7 +50,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="24dp"
-                android:onClick="plus1A"
+                android:onClick="addFaultA"
                 android:text="Fault"
                 android:theme="@style/RedBtn" />
         </LinearLayout>
@@ -99,7 +99,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="24dp"
-                android:onClick="plus1B"
+                android:onClick="addFaultB"
                 android:text="Fault"
                 android:theme="@style/RedBtn" />
 

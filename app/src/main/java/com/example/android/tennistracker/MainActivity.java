@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Integer> setPlayerA = new ArrayList<>();
     ArrayList<Integer> setPlayerB = new ArrayList<>();
     int setNum = 0;
+    int faultsPlayerA = 0;
+    int faultsPlayerB = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,21 +97,24 @@ public class MainActivity extends AppCompatActivity {
                 setPlayerA.add(setNum, 0);
                 setPlayerB.add(setNum, 0);
                 displaySetForPlayerB(setPlayerB);
+                Toast.makeText(getApplicationContext(), "Player A wins set #" + setNum + "!", Toast.LENGTH_LONG).show();
             } else {
                 //playerAWins();
-                Toast.makeText(getApplicationContext(), "Player A Wins!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Player A wins the match!", Toast.LENGTH_LONG).show();
                 reset();
             }
 
         }
 
-
         displaySetForPlayerA(setPlayerA);
     }
 
-    public void plus1A(View v) {
-        pointsPlayerA += 1;
-        displayForPlayerA(pointsPlayerA);
+    public void addFaultA(View v) {
+        faultsPlayerA += 1;
+        if (faultsPlayerA == 2) {
+            faultsPlayerA = 0;
+            addPointB(v);
+        }
     }
 
     /**
@@ -177,9 +182,10 @@ public class MainActivity extends AppCompatActivity {
                 setPlayerB.add(setNum, 0);
                 setPlayerA.add(setNum, 0);
                 displaySetForPlayerA(setPlayerA);
+                Toast.makeText(getApplicationContext(), "Player B wins set #" + setNum + "!", Toast.LENGTH_LONG).show();
             } else {
                 //playerBWins();
-                Toast.makeText(getApplicationContext(), "Player B Wins!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Player B wins the match!", Toast.LENGTH_LONG).show();
                 reset();
             }
         }
@@ -187,9 +193,13 @@ public class MainActivity extends AppCompatActivity {
         displaySetForPlayerB(setPlayerB);
     }
 
-    public void plus1B(View v) {
-        pointsPlayerB += 1;
-        displayForPlayerB(pointsPlayerB);
+    public void addFaultB(View v) {
+        faultsPlayerB += 1;
+        if (faultsPlayerB == 2) {
+            faultsPlayerB = 0;
+            addPointA(v);
+        }
+        //displayFaultsForPlayerB(pointsPlayerB);
     }
 
     /**
