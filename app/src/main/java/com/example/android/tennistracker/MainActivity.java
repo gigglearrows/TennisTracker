@@ -3,6 +3,7 @@ package com.example.android.tennistracker;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -77,6 +78,9 @@ public class MainActivity extends AppCompatActivity {
         } else {
             pointsPlayerA += 15;
         }
+        if (faultsPlayerA > 0 || faultsPlayerB > 0) {
+            resetFaults();
+        }
         displayForPlayerA(pointsPlayerA);
         displayForPlayerB(pointsPlayerB);
     }
@@ -109,11 +113,23 @@ public class MainActivity extends AppCompatActivity {
         displaySetForPlayerA(setPlayerA);
     }
 
+    /**
+     * Adds fault to player A. Displays icon if 1 fault, removes it if 2 faults
+     * and gives point to player B.
+     */
     public void addFaultA(View v) {
-        faultsPlayerA += 1;
-        if (faultsPlayerA == 2) {
-            faultsPlayerA = 0;
-            addPointB(v);
+        if (faultsPlayerB < 1) {
+            faultsPlayerA += 1;
+            TextView FaultViewA = (TextView) findViewById(R.id.player_a_fault);
+            FaultViewA.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.x, 0);
+            //FaultViewB.setImageResource(R.drawable.x);
+
+            if (faultsPlayerA == 2) {
+                FaultViewA.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+                //FaultViewB.setImageResource(0);
+                faultsPlayerA = 0;
+                addPointB(v);
+            }
         }
     }
 
@@ -161,6 +177,9 @@ public class MainActivity extends AppCompatActivity {
         } else {
             pointsPlayerB += 15;
         }
+        if (faultsPlayerA > 0 || faultsPlayerB > 0) {
+            resetFaults();
+        }
         displayForPlayerB(pointsPlayerB);
         displayForPlayerA(pointsPlayerA);
     }
@@ -193,13 +212,40 @@ public class MainActivity extends AppCompatActivity {
         displaySetForPlayerB(setPlayerB);
     }
 
+    /**
+     * Adds fault to player B. Displays icon if 1 fault, removes it if 2 faults
+     * and gives point to player A.
+     */
     public void addFaultB(View v) {
-        faultsPlayerB += 1;
-        if (faultsPlayerB == 2) {
-            faultsPlayerB = 0;
-            addPointA(v);
+        if (faultsPlayerA < 1) {
+            faultsPlayerB += 1;
+            TextView FaultViewB = (TextView) findViewById(R.id.player_b_fault);
+            FaultViewB.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.x, 0);
+            //FaultViewB.setImageResource(R.drawable.x);
+
+            if (faultsPlayerB == 2) {
+                //FaultViewB.setImageResource(0);
+                FaultViewB.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+                faultsPlayerB = 0;
+                addPointA(v);
+            }
         }
-        //displayFaultsForPlayerB(pointsPlayerB);
+    }
+
+    /**
+     * Resets faults to 0 and removes fault icons.
+     */
+    private void resetFaults() {
+        faultsPlayerA = 0;
+        faultsPlayerB = 0;
+        //ImageView FaultViewA = (ImageView) findViewById(R.id.player_a_fault);
+        //ImageView FaultViewB = (ImageView) findViewById(R.id.player_b_fault);
+        TextView FaultViewA = (TextView) findViewById(R.id.player_a_fault);
+        TextView FaultViewB = (TextView) findViewById(R.id.player_b_fault);
+        FaultViewA.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+        FaultViewB.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+        //FaultViewA.setImageResource(0);
+        //FaultViewB.setImageResource(0);
     }
 
     /**
@@ -223,5 +269,6 @@ public class MainActivity extends AppCompatActivity {
         displaySetForPlayerA(setPlayerA);
         displayForPlayerB(pointsPlayerB);
         displaySetForPlayerB(setPlayerB);
+        resetFaults();
     }
 }
