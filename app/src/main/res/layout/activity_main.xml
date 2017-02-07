@@ -32,8 +32,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:paddingBottom="24dp"
+                android:paddingBottom="4dp"
                 android:text="0" />
+            <!--style="@style/FaultText"-->
+            <TextView
+                android:id="@+id/player_a_fault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingBottom="8dp"
+
+                android:text="Fault: " />
 
             <Button
                 android:layout_width="match_parent"
@@ -81,8 +91,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:paddingBottom="24dp"
+                android:paddingBottom="4dp"
                 android:text="0" />
+            <!--style="@style/FaultText"-->
+            <TextView
+                android:id="@+id/player_b_fault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingBottom="8dp"
+                android:text="Fault: " />
 
             <Button
                 android:layout_width="match_parent"
