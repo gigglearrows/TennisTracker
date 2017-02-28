@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Tennis Tracker</string>
+    <string name="playerA_name">Player A</string>
+    <string name="playerB_name">Player B</string>
+    <string name="zero">0</string>
+    <string name="fault_label">Fault: </string>
+    <string name="pointBtn_label">Point</string>
+    <string name="faultBtn_label">Fault</string>
+    <string name="resetBtn_label">Reset</string>
+    <string name="advantage_msg">Adv</string>
+    <string name="setPoint_msg">wins set</string>
+    <string name="matchPoint_msg">wins the match. Congrats!</string>
+    <string name="duece_label">Duece</string>
 </resources>

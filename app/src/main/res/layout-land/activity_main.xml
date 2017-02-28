@@ -64,10 +64,22 @@
         </LinearLayout>
 
         <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:layout_weight="0.2" />
+
+        <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_marginTop="16dp"
             android:background="@android:color/darker_gray" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:layout_weight="0.2" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -133,13 +145,14 @@
         android:layout_marginTop="72dp"
         android:text="@string/duece_label"
         android:visibility="gone" />
+
     <Button
         android:id="@+id/reset_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_margin="32dp"
+        android:layout_margin="12dp"
         android:onClick="resetBtn"
         android:text="@string/resetBtn_label" />
 
@@ -148,8 +161,8 @@
         style="@style/ScoreText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/reset_btn"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/reset_btn"
         android:text="@string/zero" />
 
     <TextView
@@ -157,9 +170,9 @@
         style="@style/ScoreText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/player_b_set"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="center_horizontal"
+        android:layout_toLeftOf="@id/reset_btn"
         android:paddingBottom="4dp"
         android:text="@string/zero" />
 
