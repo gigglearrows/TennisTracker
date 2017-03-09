@@ -9,6 +9,8 @@
     <string name="resetBtn_label">Reset</string>
     <string name="advantage_msg">Adv</string>
     <string name="setPoint_msg">wins set</string>
-    <string name="matchPoint_msg">wins the match. Congrats!</string>
+    <string name="matchPoint_msg_1">wins</string>
+    <string name="matchPoint_msg_2">against</string>
+    <string name="matchPoint_title">Match is over!</string>
     <string name="duece_label">Duece</string>
 </resources>

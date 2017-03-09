@@ -4,11 +4,16 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ContextThemeWrapper;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.ArrayList;
+
+import static com.example.android.tennistracker.R.string.playerA_name;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -57,9 +62,30 @@ public class MainActivity extends AppCompatActivity {
      * Displays the given game points for player A.
      * @param gamePoints ArrayList with game points
      */
-    public void displaySetForPlayerA(ArrayList gamePoints) {
-        TextView scoreView = (TextView) findViewById(R.id.player_a_set);
-        scoreView.setText(String.valueOf(gamePoints));
+    public void displaySetForPlayerA(ArrayList<Integer> gamePoints) {
+        /*GridView scoreView = (GridView) findViewById(R.id.gridView);
+        //TextView test = new TextView(this);
+        //test.setText("5");
+        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(MainActivity.this, R.layout.cell, gamePoints);
+        //scoreView.addView(test);
+
+        scoreView.setAdapter(adapter);*/
+
+
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.player_a_set);
+        if (linearLayout.getChildCount() > 0) {
+            linearLayout.removeAllViews();
+        }
+        for (int i : gamePoints) {
+            TextView textView = new TextView(new ContextThemeWrapper(MainActivity.this, R.style.TableText));
+            textView.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT));
+            textView.setPadding(32, 0, 32, 0);
+            textView.setText(String.valueOf(i));
+            textView.setBackgroundResource(R.drawable.border);
+            linearLayout.addView(textView);
+        }
     }
 
     /**
@@ -109,9 +135,9 @@ public class MainActivity extends AppCompatActivity {
                 setPlayerA.add(setNum, 0);
                 setPlayerB.add(setNum, 0);
                 displaySetForPlayerB(setPlayerB);
-                Toast.makeText(getApplicationContext(), getString(R.string.playerA_name) + " " + getString(R.string.setPoint_msg) + " #" + setNum + "!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(playerA_name) + " " + getString(R.string.setPoint_msg) + " #" + setNum + "!", Toast.LENGTH_LONG).show();
             } else {
-                matchWin(getString(R.string.playerA_name) + " " + getString(R.string.matchPoint_msg));
+                matchWin(getString(R.string.playerA_name) + " " + getString(R.string.matchPoint_msg_1) + " " + setPointsPlayerA + " - " + setPointsPlayerB + " " + getString(R.string.matchPoint_msg_2) + " " + getString(R.string.playerB_name) + ".");
             }
         }
 
@@ -156,9 +182,30 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Displays the given game points for player B.
      */
-    public void displaySetForPlayerB(ArrayList gamePoints) {
-        TextView scoreView = (TextView) findViewById(R.id.player_b_set);
-        scoreView.setText(String.valueOf(gamePoints));
+    public void displaySetForPlayerB(ArrayList<Integer> gamePoints) {
+        //TextView scoreView = (TextView) findViewById(R.id.player_b_set);
+        //scoreView.setText(String.valueOf(gamePoints));
+
+        //GridView scoreView = (GridView) findViewById(gridView);
+
+        //ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this, R.layout.cell_b, gamePoints);
+
+        //scoreView.setAdapter(adapter);
+
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.player_b_set);
+        if (linearLayout.getChildCount() > 0) {
+            linearLayout.removeAllViews();
+        }
+        for (int i : gamePoints) {
+            TextView textView = new TextView(new ContextThemeWrapper(MainActivity.this, R.style.TableText));
+            textView.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT));
+            textView.setPadding(32, 0, 32, 0);
+            textView.setText(String.valueOf(i));
+            textView.setBackgroundResource(R.drawable.border);
+            linearLayout.addView(textView);
+        }
     }
 
     /**
@@ -210,7 +257,7 @@ public class MainActivity extends AppCompatActivity {
                 displaySetForPlayerA(setPlayerA);
                 Toast.makeText(getApplicationContext(), getString(R.string.playerB_name) + " " + getString(R.string.setPoint_msg) + " #" + setNum + "!", Toast.LENGTH_LONG).show();
             } else {
-                matchWin(getString(R.string.playerB_name) + " " + getString(R.string.matchPoint_msg));
+                matchWin(getString(R.string.playerB_name) + " " + getString(R.string.matchPoint_msg_1) + " " + setPointsPlayerB + " - " + setPointsPlayerA + " " + getString(R.string.matchPoint_msg_2) + " " + getString(playerA_name) + ".");
             }
         }
 
@@ -244,7 +291,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "END of game");
         AlertDialog.Builder winDialogBuilder = new AlertDialog.Builder(MainActivity.this);
         winDialogBuilder.setCancelable(false)
-                .setTitle("Match is over.")
+                .setTitle(getString(R.string.matchPoint_title))
                 .setMessage(winMessage)
                 .setPositiveButton("Quit", new DialogInterface.OnClickListener() {
                     @Override
