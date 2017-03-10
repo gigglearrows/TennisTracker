@@ -1,6 +1,7 @@
 package com.example.android.tennistracker;
 
 import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -82,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT));
             textView.setPadding(32, 0, 32, 0);
+            if (i > 5) textView.setTypeface(null, Typeface.BOLD);
             textView.setText(String.valueOf(i));
             textView.setBackgroundResource(R.drawable.border);
             linearLayout.addView(textView);
@@ -183,15 +185,6 @@ public class MainActivity extends AppCompatActivity {
      * Displays the given game points for player B.
      */
     public void displaySetForPlayerB(ArrayList<Integer> gamePoints) {
-        //TextView scoreView = (TextView) findViewById(R.id.player_b_set);
-        //scoreView.setText(String.valueOf(gamePoints));
-
-        //GridView scoreView = (GridView) findViewById(gridView);
-
-        //ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this, R.layout.cell_b, gamePoints);
-
-        //scoreView.setAdapter(adapter);
-
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.player_b_set);
         if (linearLayout.getChildCount() > 0) {
             linearLayout.removeAllViews();
@@ -203,6 +196,7 @@ public class MainActivity extends AppCompatActivity {
                     LinearLayout.LayoutParams.WRAP_CONTENT));
             textView.setPadding(32, 0, 32, 0);
             textView.setText(String.valueOf(i));
+            if (i > 5) textView.setTypeface(null, Typeface.BOLD);
             textView.setBackgroundResource(R.drawable.border);
             linearLayout.addView(textView);
         }

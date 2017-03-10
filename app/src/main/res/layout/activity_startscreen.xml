@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_startscreen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.tennistracker.StartActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:alpha="0.3"
+        android:scaleType="centerCrop"
+        android:src="@drawable/main_bg" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="48dp"
+        android:background="@android:color/white"
+        android:padding="14dp">
+
+        <TextView
+            android:id="@+id/startscreen_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="16dp"
+            android:text="Enter player names"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/startscreen_layout_a"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/startscreen_welcome"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Player A name:"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/player_a_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Player A" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/startscreen_layout_b"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/startscreen_layout_a"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Player B name:"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/player_b_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Player B" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/startscreen_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/startscreen_layout_b"
+            android:layout_marginRight="14dp"
+            android:onClick="goToMainActivity"
+            android:text="Confirm"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
