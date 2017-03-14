@@ -15,6 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import static com.example.android.tennistracker.R.string.playerA_name;
+import static com.example.android.tennistracker.R.string.playerB_name;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -32,6 +33,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            if (!extras.getString("playerAName").isEmpty()) {
+                ((TextView) findViewById(R.id.player_a_name_main)).setText(extras.getString("playerAName"));
+            }
+            if (!extras.getString("playerBName").isEmpty()) {
+                ((TextView) findViewById(R.id.player_b_name_main)).setText(extras.getString("playerBName"));
+            }
+        }
 
         setPlayerA.add(0);
         setPlayerB.add(0);
@@ -139,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
                 displaySetForPlayerB(setPlayerB);
                 Toast.makeText(getApplicationContext(), getString(playerA_name) + " " + getString(R.string.setPoint_msg) + " #" + setNum + "!", Toast.LENGTH_LONG).show();
             } else {
-                matchWin(getString(R.string.playerA_name) + " " + getString(R.string.matchPoint_msg_1) + " " + setPointsPlayerA + " - " + setPointsPlayerB + " " + getString(R.string.matchPoint_msg_2) + " " + getString(R.string.playerB_name) + ".");
+                matchWin(getString(R.string.playerA_name) + " " + getString(R.string.matchPoint_msg_1) + " " + setPointsPlayerA + " - " + setPointsPlayerB + " " + getString(R.string.matchPoint_msg_2) + " " + getString(playerB_name) + ".");
             }
         }
 
@@ -249,9 +260,9 @@ public class MainActivity extends AppCompatActivity {
                 setPlayerB.add(setNum, 0);
                 setPlayerA.add(setNum, 0);
                 displaySetForPlayerA(setPlayerA);
-                Toast.makeText(getApplicationContext(), getString(R.string.playerB_name) + " " + getString(R.string.setPoint_msg) + " #" + setNum + "!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(playerB_name) + " " + getString(R.string.setPoint_msg) + " #" + setNum + "!", Toast.LENGTH_LONG).show();
             } else {
-                matchWin(getString(R.string.playerB_name) + " " + getString(R.string.matchPoint_msg_1) + " " + setPointsPlayerB + " - " + setPointsPlayerA + " " + getString(R.string.matchPoint_msg_2) + " " + getString(playerA_name) + ".");
+                matchWin(getString(playerB_name) + " " + getString(R.string.matchPoint_msg_1) + " " + setPointsPlayerB + " - " + setPointsPlayerA + " " + getString(R.string.matchPoint_msg_2) + " " + getString(playerA_name) + ".");
             }
         }
 

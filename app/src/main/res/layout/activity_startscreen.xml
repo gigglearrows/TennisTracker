@@ -52,7 +52,9 @@
                 android:id="@+id/player_a_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Player A" />
+                android:hint="Player A"
+                android:inputType="textCapWords"
+                android:maxLines="1" />
         </LinearLayout>
 
         <LinearLayout
@@ -75,7 +77,10 @@
                 android:id="@+id/player_b_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Player B" />
+                android:ellipsize="end"
+                android:hint="Player B"
+                android:inputType="textCapWords"
+                android:maxLines="1" />
         </LinearLayout>
 
         <Button

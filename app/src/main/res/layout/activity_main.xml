@@ -18,6 +18,8 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -27,6 +29,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/player_a_name_main"
                 style="@style/PlayerNameText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -85,6 +88,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/player_b_name_main"
                 style="@style/PlayerNameText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -152,26 +156,6 @@
         android:onClick="resetBtn"
         android:text="@string/resetBtn_label" />
 
-    <!---<TextView
-        android:id="@+id/player_b_set"
-        style="@style/ScoreText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/reset_btn"
-        android:layout_centerHorizontal="true"
-        android:text="@string/zero" />-->
-
-    <!--<TextView
-        android:id="@+id/player_a_set"
-        style="@style/ScoreText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/player_b_set"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal"
-        android:paddingBottom="4dp"
-        android:text="@string/zero" />-->
-
     <LinearLayout
         android:id="@+id/player_b_set"
         android:layout_width="wrap_content"
@@ -190,27 +174,5 @@
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:orientation="horizontal" />
-
-    <!--<GridView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/gridView"
-        android:background="#ffffff"
-        android:numColumns="5"
-        android:layout_gravity="center"
-        android:padding="4dp"
-        android:stretchMode="spacingWidth"
-        android:columnWidth="40dp" />-->
-
-    <!--<GridLayout android:layout_centerInParent="true"    android:layout_centerHorizontal="true"
-        android:id="@+id/gridView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="#ffffff"
-        android:rowCount="2"
-        android:columnCount="5" >
-
-    </GridLayout>-->
 
 </RelativeLayout>
