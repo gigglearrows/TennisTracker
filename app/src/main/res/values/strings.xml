@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Tennis Tracker</string>
-    <string name="playerA_name">Player A</string>
-    <string name="playerB_name">Player B</string>
+    <string name="player_a_name">Player A</string>
+    <string name="player_b_name">Player B</string>
     <string name="zero">0</string>
     <string name="fault_label">Fault: </string>
     <string name="pointBtn_label">Point</string>
@@ -12,5 +12,9 @@
     <string name="matchPoint_msg_1">wins</string>
     <string name="matchPoint_msg_2">against</string>
     <string name="matchPoint_title">Match is over!</string>
-    <string name="duece_label">Duece</string>
+    <string name="deuce_label">Deuce</string>
+
+    <string name="hint_playerA">Player A</string>
+    <string name="hint_playerB">Player B</string>
+    <string name="btn_confirm">Confirm</string>
 </resources>

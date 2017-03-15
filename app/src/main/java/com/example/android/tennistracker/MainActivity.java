@@ -14,9 +14,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import static com.example.android.tennistracker.R.string.playerA_name;
-import static com.example.android.tennistracker.R.string.playerB_name;
-
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     int pointsPlayerA = 0;
@@ -28,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     int setNum = 0;
     int faultsPlayerA = 0;
     int faultsPlayerB = 0;
+    String playerAName;
+    String playerBName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +36,16 @@ public class MainActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             if (!extras.getString("playerAName").isEmpty()) {
-                ((TextView) findViewById(R.id.player_a_name_main)).setText(extras.getString("playerAName"));
+                playerAName = extras.getString("playerAName");
+                ((TextView) findViewById(R.id.player_a_name_main)).setText(playerAName);
+            } else {
+                playerAName = getString(R.string.player_a_name);
             }
             if (!extras.getString("playerBName").isEmpty()) {
-                ((TextView) findViewById(R.id.player_b_name_main)).setText(extras.getString("playerBName"));
+                playerBName = extras.getString("playerBName");
+                ((TextView) findViewById(R.id.player_b_name_main)).setText(playerBName);
+            } else {
+                playerBName = getString(R.string.player_b_name);
             }
         }
 
@@ -75,24 +80,30 @@ public class MainActivity extends AppCompatActivity {
      * @param gamePoints ArrayList with game points
      */
     public void displaySetForPlayerA(ArrayList<Integer> gamePoints) {
-        /*GridView scoreView = (GridView) findViewById(R.id.gridView);
-        //TextView test = new TextView(this);
-        //test.setText("5");
-        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(MainActivity.this, R.layout.cell, gamePoints);
-        //scoreView.addView(test);
-
-        scoreView.setAdapter(adapter);*/
-
-
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.player_a_set);
+
         if (linearLayout.getChildCount() > 0) {
             linearLayout.removeAllViews();
         }
+
+        TextView tableAName = new TextView(new ContextThemeWrapper(MainActivity.this, R.style.TableHeader));
+        LinearLayout.LayoutParams llpPlayerA = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        llpPlayerA.setMargins(4, 0, 4, 0);
+        tableAName.setLayoutParams(llpPlayerA);
+        tableAName.setPadding(32, 80, 32, 80);
+        tableAName.setText(playerAName);
+        tableAName.setBackgroundResource(R.drawable.border);
+        linearLayout.addView(tableAName);
+
         for (int i : gamePoints) {
             TextView textView = new TextView(new ContextThemeWrapper(MainActivity.this, R.style.TableText));
-            textView.setLayoutParams(new LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT));
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            llp.setMargins(4, 0, 4, 0);
+            textView.setLayoutParams(llp);
             textView.setPadding(32, 0, 32, 0);
             if (i > 5) textView.setTypeface(null, Typeface.BOLD);
             textView.setText(String.valueOf(i));
@@ -148,9 +159,9 @@ public class MainActivity extends AppCompatActivity {
                 setPlayerA.add(setNum, 0);
                 setPlayerB.add(setNum, 0);
                 displaySetForPlayerB(setPlayerB);
-                Toast.makeText(getApplicationContext(), getString(playerA_name) + " " + getString(R.string.setPoint_msg) + " #" + setNum + "!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), playerAName + " " + getString(R.string.setPoint_msg) + " #" + setNum + "!", Toast.LENGTH_LONG).show();
             } else {
-                matchWin(getString(R.string.playerA_name) + " " + getString(R.string.matchPoint_msg_1) + " " + setPointsPlayerA + " - " + setPointsPlayerB + " " + getString(R.string.matchPoint_msg_2) + " " + getString(playerB_name) + ".");
+                matchWin(playerAName + " " + getString(R.string.matchPoint_msg_1) + " " + setPointsPlayerA + " - " + setPointsPlayerB + " " + getString(R.string.matchPoint_msg_2) + " " + playerBName + ".");
             }
         }
 
@@ -200,11 +211,25 @@ public class MainActivity extends AppCompatActivity {
         if (linearLayout.getChildCount() > 0) {
             linearLayout.removeAllViews();
         }
+
+        TextView tableBName = new TextView(new ContextThemeWrapper(MainActivity.this, R.style.TableHeader));
+        LinearLayout.LayoutParams llpPlayerB = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        llpPlayerB.setMargins(4, 0, 4, 0);
+        tableBName.setLayoutParams(llpPlayerB);
+        tableBName.setPadding(32, 80, 32, 80);
+        tableBName.setText(playerBName);
+        tableBName.setBackgroundResource(R.drawable.border);
+        linearLayout.addView(tableBName);
+
         for (int i : gamePoints) {
             TextView textView = new TextView(new ContextThemeWrapper(MainActivity.this, R.style.TableText));
-            textView.setLayoutParams(new LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT));
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            llp.setMargins(4, 0, 4, 0);
+            textView.setLayoutParams(llp);
             textView.setPadding(32, 0, 32, 0);
             textView.setText(String.valueOf(i));
             if (i > 5) textView.setTypeface(null, Typeface.BOLD);
@@ -260,9 +285,9 @@ public class MainActivity extends AppCompatActivity {
                 setPlayerB.add(setNum, 0);
                 setPlayerA.add(setNum, 0);
                 displaySetForPlayerA(setPlayerA);
-                Toast.makeText(getApplicationContext(), getString(playerB_name) + " " + getString(R.string.setPoint_msg) + " #" + setNum + "!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), playerBName + " " + getString(R.string.setPoint_msg) + " #" + setNum + "!", Toast.LENGTH_LONG).show();
             } else {
-                matchWin(getString(playerB_name) + " " + getString(R.string.matchPoint_msg_1) + " " + setPointsPlayerB + " - " + setPointsPlayerA + " " + getString(R.string.matchPoint_msg_2) + " " + getString(playerA_name) + ".");
+                matchWin(playerBName + " " + getString(R.string.matchPoint_msg_1) + " " + setPointsPlayerB + " - " + setPointsPlayerA + " " + getString(R.string.matchPoint_msg_2) + " " + playerAName + ".");
             }
         }
 

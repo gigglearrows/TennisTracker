@@ -1,100 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_startscreen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#232323"
     tools:context="com.example.android.tennistracker.StartActivity">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:alpha="0.3"
+        android:alpha="0.5"
         android:scaleType="centerCrop"
         android:src="@drawable/main_bg" />
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_margin="48dp"
-        android:background="@android:color/white"
-        android:padding="14dp">
+        android:layout_margin="16dp"
+        card_view:cardBackgroundColor="#EFEBDF"
+        card_view:cardCornerRadius="2dp"
+        card_view:contentPadding="16dp">
 
-        <TextView
-            android:id="@+id/startscreen_welcome"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:paddingBottom="16dp"
-            android:text="Enter player names"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold" />
+            android:layout_centerInParent="true">
 
-        <LinearLayout
-            android:id="@+id/startscreen_layout_a"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/startscreen_welcome"
-            android:layout_centerHorizontal="true"
-            android:orientation="vertical">
 
             <TextView
+                android:id="@+id/startscreen_welcome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Player A name:"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:fontFamily="sans-serif-light"
+                android:paddingBottom="16dp"
+                android:text="Enter player names"
+                android:textColor="#2f3b37"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/player_a_name"
+            <LinearLayout
+                android:id="@+id/startscreen_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Player A"
-                android:inputType="textCapWords"
-                android:maxLines="1" />
-        </LinearLayout>
+                android:layout_below="@id/startscreen_welcome"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal">
 
-        <LinearLayout
-            android:id="@+id/startscreen_layout_b"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/startscreen_layout_a"
-            android:layout_centerHorizontal="true"
-            android:orientation="vertical"
-            android:padding="12dp">
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_playerAName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColorHint="#2f3b37">
 
-            <TextView
+                    <EditText
+                        android:id="@+id/player_a_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_playerA"
+                        android:inputType="textCapWords"
+                        android:maxLines="1"
+                        android:textColor="#2f3b37" />
+                </android.support.design.widget.TextInputLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_weight="0"
+                    android:fontFamily="sans-serif-light"
+                    android:padding="12dp"
+                    android:text="VS"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_playerBName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColorHint="#2f3b37">
+
+                    <EditText
+                        android:id="@+id/player_b_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_playerB"
+                        android:inputType="textCapWords"
+                        android:maxLines="1"
+                        android:textColor="#2f3b37" />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/startscreen_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Player B name:"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textStyle="bold" />
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/startscreen_layout"
+                android:onClick="goToMainActivity"
+                android:text="@string/btn_confirm"
+                android:theme="@style/NormalBtn" />
 
-            <EditText
-                android:id="@+id/player_b_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:hint="Player B"
-                android:inputType="textCapWords"
-                android:maxLines="1" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/startscreen_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/startscreen_layout_b"
-            android:layout_marginRight="14dp"
-            android:onClick="goToMainActivity"
-            android:text="Confirm"
-            android:textStyle="bold" />
-
-    </RelativeLayout>
-
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 
 </RelativeLayout>
