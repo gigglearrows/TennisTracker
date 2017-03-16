@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-light"
                 android:paddingBottom="16dp"
-                android:text="Enter player names"
+                android:text="@string/enter_names_header"
                 android:textColor="#2f3b37"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -63,7 +63,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/hint_playerA"
-                        android:inputType="textCapWords"
+                        android:inputType="textPersonName|textCapWords|textNoSuggestions"
+                        android:maxLength="35"
                         android:maxLines="1"
                         android:textColor="#2f3b37" />
                 </android.support.design.widget.TextInputLayout>
@@ -92,12 +93,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/hint_playerB"
-                        android:inputType="textCapWords"
+                        android:inputType="textPersonName|textCapWords|textNoSuggestions"
+                        android:maxLength="35"
                         android:maxLines="1"
                         android:textColor="#2f3b37" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
-
 
             <Button
                 android:id="@+id/startscreen_btn"

@@ -13,7 +13,7 @@
     <string name="matchPoint_msg_2">against</string>
     <string name="matchPoint_title">Match is over!</string>
     <string name="deuce_label">Deuce</string>
-
+    <string name="enter_names_header">Enter player names</string>
     <string name="hint_playerA">Player A</string>
     <string name="hint_playerB">Player B</string>
     <string name="btn_confirm">Confirm</string>

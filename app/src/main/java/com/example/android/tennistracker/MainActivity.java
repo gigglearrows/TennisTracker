@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     int pointsPlayerA = 0;
@@ -38,12 +39,14 @@ public class MainActivity extends AppCompatActivity {
             if (!extras.getString("playerAName").isEmpty()) {
                 playerAName = extras.getString("playerAName");
                 ((TextView) findViewById(R.id.player_a_name_main)).setText(playerAName);
+                ((TextView) findViewById(R.id.tableHeaderPlayerA)).setText(playerAName);
             } else {
                 playerAName = getString(R.string.player_a_name);
             }
             if (!extras.getString("playerBName").isEmpty()) {
                 playerBName = extras.getString("playerBName");
                 ((TextView) findViewById(R.id.player_b_name_main)).setText(playerBName);
+                ((TextView) findViewById(R.id.tableHeaderPlayerB)).setText(playerBName);
             } else {
                 playerBName = getString(R.string.player_b_name);
             }
@@ -59,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Displays the given points for player A.
+     *
      * @param points points to display
      */
     public void displayForPlayerA(int points) {
@@ -77,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Displays the given game points for player A.
+     *
      * @param gamePoints ArrayList with game points
      */
     public void displaySetForPlayerA(ArrayList<Integer> gamePoints) {
@@ -86,23 +91,12 @@ public class MainActivity extends AppCompatActivity {
             linearLayout.removeAllViews();
         }
 
-        TextView tableAName = new TextView(new ContextThemeWrapper(MainActivity.this, R.style.TableHeader));
-        LinearLayout.LayoutParams llpPlayerA = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
-        llpPlayerA.setMargins(4, 0, 4, 0);
-        tableAName.setLayoutParams(llpPlayerA);
-        tableAName.setPadding(32, 80, 32, 80);
-        tableAName.setText(playerAName);
-        tableAName.setBackgroundResource(R.drawable.border);
-        linearLayout.addView(tableAName);
-
         for (int i : gamePoints) {
             TextView textView = new TextView(new ContextThemeWrapper(MainActivity.this, R.style.TableText));
             LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT);
-            llp.setMargins(4, 0, 4, 0);
+            llp.setMargins(8, 0, 0, 0);
             textView.setLayoutParams(llp);
             textView.setPadding(32, 0, 32, 0);
             if (i > 5) textView.setTypeface(null, Typeface.BOLD);
@@ -212,23 +206,12 @@ public class MainActivity extends AppCompatActivity {
             linearLayout.removeAllViews();
         }
 
-        TextView tableBName = new TextView(new ContextThemeWrapper(MainActivity.this, R.style.TableHeader));
-        LinearLayout.LayoutParams llpPlayerB = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
-        llpPlayerB.setMargins(4, 0, 4, 0);
-        tableBName.setLayoutParams(llpPlayerB);
-        tableBName.setPadding(32, 80, 32, 80);
-        tableBName.setText(playerBName);
-        tableBName.setBackgroundResource(R.drawable.border);
-        linearLayout.addView(tableBName);
-
         for (int i : gamePoints) {
             TextView textView = new TextView(new ContextThemeWrapper(MainActivity.this, R.style.TableText));
             LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT);
-            llp.setMargins(4, 0, 4, 0);
+            llp.setMargins(8, 0, 0, 0);
             textView.setLayoutParams(llp);
             textView.setPadding(32, 0, 32, 0);
             textView.setText(String.valueOf(i));
@@ -375,4 +358,19 @@ public class MainActivity extends AppCompatActivity {
         displaySetForPlayerB(setPlayerB);
         resetFaults();
     }
+    /*
+    private void tablenames() {
+        TextView tableBName = new TextView(new ContextThemeWrapper(MainActivity.this, R.style.TableHeader));
+        LinearLayout.LayoutParams llpPlayerB = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        llpPlayerB.setMargins(4, 0, 4, 0);
+        tableBName.setLayoutParams(llpPlayerB);
+        tableBName.setPadding(32, 80, 32, 80);
+        tableBName.setText(playerBName);
+        tableBName.setBackgroundResource(R.drawable.border);
+        .addView(tableBName);
+        int tableBWidth = tableBName.getWidth();
+        Log.v(TAG, "tableBName Width: " + tableBWidth);
+    }*/
 }
