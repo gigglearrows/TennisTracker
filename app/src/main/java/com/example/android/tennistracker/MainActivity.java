@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Displays the given points for player A.
      *
-     * @param points points to display
+     * @param points points to display for player A
      */
     public void displayForPlayerA(int points) {
         TextView scoreView = (TextView) findViewById(R.id.player_a_score);
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Displays the given game points for player A.
      *
-     * @param gamePoints ArrayList with game points
+     * @param gamePoints ArrayList with game points for player A to display
      */
     public void displaySetForPlayerA(ArrayList<Integer> gamePoints) {
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.player_a_set);
@@ -182,6 +182,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Displays the given score for player B.
+     * @param points number of points for player B to display
      */
     public void displayForPlayerB(int points) {
         TextView scoreView = (TextView) findViewById(R.id.player_b_score);
@@ -199,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Displays the given game points for player B.
+     * @param gamePoints Arraylist containing the game points for player B
      */
     public void displaySetForPlayerB(ArrayList<Integer> gamePoints) {
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.player_b_set);
@@ -296,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Win match for player X.
+     * Win match for player X. Opens up an AlertDialog
      *
      * @param winMessage Message to display (e.g Player X wins!)
      */
@@ -358,19 +360,4 @@ public class MainActivity extends AppCompatActivity {
         displaySetForPlayerB(setPlayerB);
         resetFaults();
     }
-    /*
-    private void tablenames() {
-        TextView tableBName = new TextView(new ContextThemeWrapper(MainActivity.this, R.style.TableHeader));
-        LinearLayout.LayoutParams llpPlayerB = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
-        llpPlayerB.setMargins(4, 0, 4, 0);
-        tableBName.setLayoutParams(llpPlayerB);
-        tableBName.setPadding(32, 80, 32, 80);
-        tableBName.setText(playerBName);
-        tableBName.setBackgroundResource(R.drawable.border);
-        .addView(tableBName);
-        int tableBWidth = tableBName.getWidth();
-        Log.v(TAG, "tableBName Width: " + tableBWidth);
-    }*/
 }

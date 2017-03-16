@@ -29,9 +29,9 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startscreen);
         editTextA = (EditText) findViewById(R.id.player_a_name);
-        editTextA.setFilters(new InputFilter[]{filter});
+        editTextA.setFilters(new InputFilter[]{filter, new InputFilter.LengthFilter(35)});
         editTextB = (EditText) findViewById(R.id.player_b_name);
-        editTextB.setFilters(new InputFilter[]{filter});
+        editTextB.setFilters(new InputFilter[]{filter, new InputFilter.LengthFilter(35)});
     }
 
     public void goToMainActivity(View view) {
