@@ -5,5 +5,9 @@
     <color name="colorAccent">#40A14C</color>
 
     <color name="almostWhite">#EFEBDF</color>
+    <color name="almostWhiteCC">#ccEFEBDF</color>
+    <color name="almostWhiteBB">#bbEFEBDF</color>
     <color name="dark">#2f3b37</color>
+    <color name="darkCC">#cc2f3b37</color>
+    <color name="darkBB">#bb2f3b37</color>
 </resources>

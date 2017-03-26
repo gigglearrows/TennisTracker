@@ -17,4 +17,5 @@
     <string name="hint_playerA">Player A</string>
     <string name="hint_playerB">Player B</string>
     <string name="btn_confirm">Confirm</string>
+    <string name="tiebreak_label">Tiebreak</string>
 </resources>

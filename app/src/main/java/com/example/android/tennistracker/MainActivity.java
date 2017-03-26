@@ -3,10 +3,13 @@ package com.example.android.tennistracker;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ContextThemeWrapper;
+import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -29,23 +32,77 @@ public class MainActivity extends AppCompatActivity {
     String playerAName;
     String playerBName;
 
+    TextView playerANameLabel;
+    TextView playerBNameLabel;
+    TextView FaultViewB;
+    TextView FaultViewA;
+    LinearLayout linearLayoutA;
+    LinearLayout linearLayoutB;
+    TextView scoreViewA;
+    TextView scoreViewB;
+    TextView dueceView;
+    TextView tieBreakView;
+    CardView cardViewA;
+    CardView cardViewB;
+    TextView tableHeaderPlayerA;
+    TextView tableHeaderPlayerB;
+    int tableHeight;
+    int tablePadding;
+    int tablePaddingV;
+
+    boolean aHasTwoPointsMore = false;
+    boolean bHasTwoSetsMore = false;
+    boolean isTieBreak = false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+        playerANameLabel = (TextView) findViewById(R.id.player_a_name_main);
+        playerBNameLabel = (TextView) findViewById(R.id.player_b_name_main);
+        linearLayoutA = (LinearLayout) findViewById(R.id.player_a_set);
+        linearLayoutB = (LinearLayout) findViewById(R.id.player_b_set);
+        FaultViewA = (TextView) findViewById(R.id.player_a_fault);
+        FaultViewB = (TextView) findViewById(R.id.player_b_fault);
+        scoreViewA = (TextView) findViewById(R.id.player_a_score);
+        scoreViewB = (TextView) findViewById(R.id.player_b_score);
+        dueceView = (TextView) findViewById(R.id.deuce_text);
+        tieBreakView = (TextView) findViewById(R.id.tiebreak_text);
+        cardViewA = (CardView) findViewById(R.id.card_viewA);
+        cardViewB = (CardView) findViewById(R.id.card_viewB);
+        tableHeaderPlayerA = (TextView) findViewById(R.id.tableHeaderPlayerA);
+        tableHeaderPlayerB = (TextView) findViewById(R.id.tableHeaderPlayerB);
+
+        tableHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 11, getResources().getDisplayMetrics());
+        int headerTextSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics());
+        tablePadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics());
+        tablePaddingV = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics());
+        int headerPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 6, getResources().getDisplayMetrics());
+
+        tableHeaderPlayerA.setTextSize(headerTextSize);
+        tableHeaderPlayerA.setPadding(tablePadding, headerPadding, tablePadding, headerPadding);
+        tableHeaderPlayerB.setTextSize(headerTextSize);
+        tableHeaderPlayerB.setPadding(tablePadding, headerPadding, tablePadding, headerPadding);
+
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             if (!extras.getString("playerAName").isEmpty()) {
                 playerAName = extras.getString("playerAName");
-                ((TextView) findViewById(R.id.player_a_name_main)).setText(playerAName);
+                playerANameLabel.setText(playerAName);
                 ((TextView) findViewById(R.id.tableHeaderPlayerA)).setText(playerAName);
             } else {
                 playerAName = getString(R.string.player_a_name);
             }
             if (!extras.getString("playerBName").isEmpty()) {
                 playerBName = extras.getString("playerBName");
-                ((TextView) findViewById(R.id.player_b_name_main)).setText(playerBName);
+                playerBNameLabel.setText(playerBName);
                 ((TextView) findViewById(R.id.tableHeaderPlayerB)).setText(playerBName);
             } else {
                 playerBName = getString(R.string.player_b_name);
@@ -66,16 +123,15 @@ public class MainActivity extends AppCompatActivity {
      * @param points points to display for player A
      */
     public void displayForPlayerA(int points) {
-        TextView scoreView = (TextView) findViewById(R.id.player_a_score);
-        if (points > 40) {
-            scoreView.setText(getString(R.string.advantage_msg));
+        if (points > 40 && !isTieBreak) {
+            scoreViewA.setText(getString(R.string.advantage_msg));
         } else {
-            scoreView.setText(String.valueOf(points));
+            scoreViewA.setText(String.valueOf(points));
         }
-        if (pointsPlayerA == 40 && pointsPlayerB == 40) {
-            findViewById(R.id.deuce_text).setVisibility(View.VISIBLE);
-        } else if (findViewById(R.id.deuce_text).getVisibility() == View.VISIBLE) {
-            findViewById(R.id.deuce_text).setVisibility(View.GONE);
+        if (pointsPlayerA == 40 && pointsPlayerB == 40 && !isTieBreak) {
+            dueceView.setVisibility(View.VISIBLE);
+        } else if (dueceView.getVisibility() == View.VISIBLE) {
+            dueceView.setVisibility(View.GONE);
         }
     }
 
@@ -85,24 +141,27 @@ public class MainActivity extends AppCompatActivity {
      * @param gamePoints ArrayList with game points for player A to display
      */
     public void displaySetForPlayerA(ArrayList<Integer> gamePoints) {
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.player_a_set);
 
-        if (linearLayout.getChildCount() > 0) {
-            linearLayout.removeAllViews();
+        if (linearLayoutA.getChildCount() > 0) {
+            linearLayoutA.removeAllViews();
         }
 
+        int iNumber = 0;
         for (int i : gamePoints) {
             TextView textView = new TextView(new ContextThemeWrapper(MainActivity.this, R.style.TableText));
             LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT);
-            llp.setMargins(8, 0, 0, 0);
+            llp.setMargins(tablePaddingV, 0, 0, 0);
             textView.setLayoutParams(llp);
-            textView.setPadding(32, 0, 32, 0);
-            if (i > 5) textView.setTypeface(null, Typeface.BOLD);
+            textView.setPadding(tablePadding, tablePaddingV, tablePadding, tablePaddingV);
+            textView.setTextSize(tableHeight);
+            if ((i > 5 && (i - setPlayerB.get(iNumber)) >= 2) || i == 7)
+                textView.setTypeface(null, Typeface.BOLD);
             textView.setText(String.valueOf(i));
             textView.setBackgroundResource(R.drawable.border);
-            linearLayout.addView(textView);
+            linearLayoutA.addView(textView);
+            iNumber++;
         }
     }
 
@@ -111,7 +170,15 @@ public class MainActivity extends AppCompatActivity {
      * If its 40-40 it's deuce and a player need to win with 2 clear points.
      */
     public void addPointA(View v) {
-        if (pointsPlayerA == 30) {
+        if (isTieBreak) {
+            pointsPlayerA++;
+            if (pointsPlayerA >= 6 && (pointsPlayerA - pointsPlayerB >= 2)) {
+                pointsPlayerA = 0;
+                pointsPlayerB = 0;
+                addGamePointA();
+                changeBack();
+            }
+        } else if (pointsPlayerA == 30) {
             pointsPlayerA += 10;
         } else if (pointsPlayerA == 40) {
             if (pointsPlayerB > 40) {
@@ -142,10 +209,12 @@ public class MainActivity extends AppCompatActivity {
      */
     private void addGamePointA() {
         Integer value = setPlayerA.get(setNum);
+        Integer valueB = setPlayerB.get(setNum);
         value++;
         setPlayerA.set(setNum, value);
+        aHasTwoPointsMore = (value - valueB >= 2);
 
-        if (value >= 6) {
+        if ((value >= 6 && aHasTwoPointsMore) || isTieBreak) {
             setNum++;
             setPointsPlayerA++;
 
@@ -157,6 +226,8 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 matchWin(playerAName + " " + getString(R.string.matchPoint_msg_1) + " " + setPointsPlayerA + " - " + setPointsPlayerB + " " + getString(R.string.matchPoint_msg_2) + " " + playerBName + ".");
             }
+        } else if (value == 6 && valueB == 6) {
+            changeToTieBreak();
         }
 
         displaySetForPlayerA(setPlayerA);
@@ -169,7 +240,6 @@ public class MainActivity extends AppCompatActivity {
     public void addFaultA(View v) {
         if (faultsPlayerB < 1) {
             faultsPlayerA += 1;
-            TextView FaultViewA = (TextView) findViewById(R.id.player_a_fault);
             FaultViewA.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.x, 0);
 
             if (faultsPlayerA == 2) {
@@ -182,44 +252,48 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Displays the given score for player B.
+     *
      * @param points number of points for player B to display
      */
     public void displayForPlayerB(int points) {
-        TextView scoreView = (TextView) findViewById(R.id.player_b_score);
-        if (points > 40) {
-            scoreView.setText(getString(R.string.advantage_msg));
+        if (points > 40 && !isTieBreak) {
+            scoreViewB.setText(getString(R.string.advantage_msg));
         } else {
-            scoreView.setText(String.valueOf(points));
+            scoreViewB.setText(String.valueOf(points));
         }
-        if (pointsPlayerA == 40 && pointsPlayerB == 40) {
-            findViewById(R.id.deuce_text).setVisibility(View.VISIBLE);
-        } else if (findViewById(R.id.deuce_text).getVisibility() == View.VISIBLE) {
-            findViewById(R.id.deuce_text).setVisibility(View.GONE);
+        if (pointsPlayerA == 40 && pointsPlayerB == 40 && !isTieBreak) {
+            dueceView.setVisibility(View.VISIBLE);
+        } else if (dueceView.getVisibility() == View.VISIBLE) {
+            dueceView.setVisibility(View.GONE);
         }
     }
 
     /**
      * Displays the given game points for player B.
+     *
      * @param gamePoints Arraylist containing the game points for player B
      */
     public void displaySetForPlayerB(ArrayList<Integer> gamePoints) {
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.player_b_set);
-        if (linearLayout.getChildCount() > 0) {
-            linearLayout.removeAllViews();
+        if (linearLayoutB.getChildCount() > 0) {
+            linearLayoutB.removeAllViews();
         }
 
+        int iNumber = 0;
         for (int i : gamePoints) {
             TextView textView = new TextView(new ContextThemeWrapper(MainActivity.this, R.style.TableText));
             LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT);
-            llp.setMargins(8, 0, 0, 0);
+            llp.setMargins(tablePaddingV, 0, 0, 0);
             textView.setLayoutParams(llp);
-            textView.setPadding(32, 0, 32, 0);
+            textView.setPadding(tablePadding, tablePaddingV, tablePadding, tablePaddingV);
+            textView.setTextSize(tableHeight);
+            if ((i == 6 && (i - setPlayerA.get(iNumber)) >= 2) || i == 7)
+                textView.setTypeface(null, Typeface.BOLD);
             textView.setText(String.valueOf(i));
-            if (i > 5) textView.setTypeface(null, Typeface.BOLD);
             textView.setBackgroundResource(R.drawable.border);
-            linearLayout.addView(textView);
+            linearLayoutB.addView(textView);
+            iNumber++;
         }
     }
 
@@ -228,7 +302,15 @@ public class MainActivity extends AppCompatActivity {
      * If its 40-40 it's deuce and a player need to win with 2 clear points.
      */
     public void addPointB(View v) {
-        if (pointsPlayerB == 30) {
+        if (isTieBreak) {
+            pointsPlayerB++;
+            if (pointsPlayerB >= 6 && (pointsPlayerB - pointsPlayerA >= 2)) {
+                pointsPlayerA = 0;
+                pointsPlayerB = 0;
+                addGamePointB();
+                changeBack();
+            }
+        } else if (pointsPlayerB == 30) {
             pointsPlayerB += 10;
         } else if (pointsPlayerB == 40) {
             if (pointsPlayerA > 40) {
@@ -259,10 +341,12 @@ public class MainActivity extends AppCompatActivity {
      */
     private void addGamePointB() {
         Integer value = setPlayerB.get(setNum);
+        Integer valueA = setPlayerA.get(setNum);
         value++;
         setPlayerB.set(setNum, value);
+        bHasTwoSetsMore = (value - valueA >= 2);
 
-        if (value >= 6) {
+        if ((value >= 6 && bHasTwoSetsMore) || isTieBreak) {
             setNum++;
             setPointsPlayerB++;
 
@@ -274,6 +358,8 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 matchWin(playerBName + " " + getString(R.string.matchPoint_msg_1) + " " + setPointsPlayerB + " - " + setPointsPlayerA + " " + getString(R.string.matchPoint_msg_2) + " " + playerAName + ".");
             }
+        } else if (value == 6 && valueA == 6) {
+            changeToTieBreak();
         }
 
         displaySetForPlayerB(setPlayerB);
@@ -286,7 +372,6 @@ public class MainActivity extends AppCompatActivity {
     public void addFaultB(View v) {
         if (faultsPlayerA < 1) {
             faultsPlayerB += 1;
-            TextView FaultViewB = (TextView) findViewById(R.id.player_b_fault);
             FaultViewB.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.x, 0);
 
             if (faultsPlayerB == 2) {
@@ -331,8 +416,6 @@ public class MainActivity extends AppCompatActivity {
         faultsPlayerA = 0;
         faultsPlayerB = 0;
 
-        TextView FaultViewA = (TextView) findViewById(R.id.player_a_fault);
-        TextView FaultViewB = (TextView) findViewById(R.id.player_b_fault);
         FaultViewA.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
         FaultViewB.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
     }
@@ -359,5 +442,39 @@ public class MainActivity extends AppCompatActivity {
         displayForPlayerB(pointsPlayerB);
         displaySetForPlayerB(setPlayerB);
         resetFaults();
+        changeBack();
     }
+
+    /**
+     * Changing colors on tiebreak
+     */
+    private void changeToTieBreak() {
+        isTieBreak = true;
+        tieBreakView.setVisibility(View.VISIBLE);
+        cardViewA.setBackgroundColor(ContextCompat.getColor(this, R.color.dark));
+        playerANameLabel.setTextColor(ContextCompat.getColor(this, R.color.almostWhiteCC));
+        cardViewB.setBackgroundColor(ContextCompat.getColor(this, R.color.dark));
+        playerBNameLabel.setTextColor(ContextCompat.getColor(this, R.color.almostWhiteCC));
+        scoreViewA.setTextColor(ContextCompat.getColor(this, R.color.almostWhite));
+        scoreViewB.setTextColor(ContextCompat.getColor(this, R.color.almostWhite));
+        FaultViewA.setTextColor(ContextCompat.getColor(this, R.color.almostWhiteBB));
+        FaultViewB.setTextColor(ContextCompat.getColor(this, R.color.almostWhiteBB));
+    }
+
+    /**
+     * Changing colors back from tiebreakcolors
+     */
+    private void changeBack() {
+        isTieBreak = false;
+        tieBreakView.setVisibility(View.GONE);
+        cardViewA.setBackgroundColor(ContextCompat.getColor(this, R.color.almostWhite));
+        playerANameLabel.setTextColor(ContextCompat.getColor(this, R.color.darkCC));
+        cardViewB.setBackgroundColor(ContextCompat.getColor(this, R.color.almostWhite));
+        playerBNameLabel.setTextColor(ContextCompat.getColor(this, R.color.darkCC));
+        scoreViewA.setTextColor(ContextCompat.getColor(this, R.color.dark));
+        scoreViewB.setTextColor(ContextCompat.getColor(this, R.color.dark));
+        FaultViewA.setTextColor(ContextCompat.getColor(this, R.color.darkBB));
+        FaultViewB.setTextColor(ContextCompat.getColor(this, R.color.darkBB));
+    }
+
 }

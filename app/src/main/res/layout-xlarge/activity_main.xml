@@ -26,7 +26,6 @@
 
         <android.support.v7.widget.CardView
             android:id="@+id/card_viewA"
-            style="@style/cardStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
@@ -35,6 +34,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
+            card_view:cardBackgroundColor="#EFEBDF"
+            card_view:cardCornerRadius="2dp"
             card_view:contentPadding="16dp">
 
             <LinearLayout
@@ -95,7 +96,6 @@
 
         <android.support.v7.widget.CardView
             android:id="@+id/card_viewB"
-            style="@style/cardStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -104,11 +104,14 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
+            card_view:cardBackgroundColor="#EFEBDF"
+            card_view:cardCornerRadius="2dp"
             card_view:contentPadding="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
@@ -169,19 +172,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="72dp"
         android:text="@string/deuce_label"
-        android:visibility="gone" />
-
-    <TextView
-        android:id="@+id/tiebreak_text"
-        style="@style/TieBreakText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="68dp"
-        android:text="@string/tiebreak_label"
         android:visibility="gone" />
 
     <Button
@@ -190,10 +182,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_margin="16dp"
+        android:layout_margin="32dp"
         android:onClick="resetBtn"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
+        android:paddingLeft="64dp"
+        android:paddingRight="64dp"
         android:text="@string/resetBtn_label"
         android:theme="@style/ResetBtn" />
 
@@ -208,143 +200,78 @@
         android:orientation="vertical"
         android:paddingTop="4dp">
 
-        <LinearLayout
-            android:id="@+id/table"
+
+        <RelativeLayout
+            android:id="@+id/relativeTableLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:orientation="vertical">
-
+            android:layout_gravity="center_horizontal">
 
             <LinearLayout
-                android:id="@+id/tableHeaderA"
-                android:layout_width="match_parent"
+                android:id="@+id/tableHeader"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tableHeaderPlayerA"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    style="@style/TableHeaderXLarge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
                     android:background="@drawable/border"
                     android:ellipsize="end"
-                    android:gravity="center_vertical|end"
+                    android:gravity="end"
                     android:maxEms="8"
                     android:maxLines="1"
                     android:paddingBottom="20dp"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
                     android:paddingTop="20dp"
-                    android:text="@string/player_a_name"
-                    android:theme="@style/TableHeader" />
-
-                <LinearLayout
-                    android:id="@+id/player_a_set"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/TableText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginStart="2dp"
-                        android:background="@drawable/border"
-                        android:paddingBottom="2dp"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
-                        android:paddingTop="2dp"
-                        android:text="0" />
-
-                    <TextView
-                        style="@style/TableText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="2dp"
-                        android:background="@drawable/border"
-                        android:paddingBottom="2dp"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
-                        android:paddingTop="2dp"
-                        android:text="0" />
-
-                    <TextView
-                        style="@style/TableText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="2dp"
-                        android:background="@drawable/border"
-                        android:paddingBottom="2dp"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
-                        android:paddingTop="2dp"
-                        android:text="0" />
-
-                    <TextView
-                        style="@style/TableText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="2dp"
-                        android:background="@drawable/border"
-                        android:paddingBottom="2dp"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
-                        android:paddingTop="2dp"
-                        android:text="0" />
-
-                    <TextView
-                        style="@style/TableText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="2dp"
-                        android:background="@drawable/border"
-                        android:paddingBottom="2dp"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
-                        android:paddingTop="2dp"
-                        android:text="0" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/tableHeaderB"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:orientation="horizontal">
+                    android:text="@string/player_a_name" />
 
                 <TextView
                     android:id="@+id/tableHeaderPlayerB"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    style="@style/TableHeaderXLarge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/border"
                     android:ellipsize="end"
-                    android:gravity="center_vertical|end"
+                    android:gravity="end"
                     android:maxEms="8"
                     android:maxLines="1"
                     android:paddingBottom="20dp"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
                     android:paddingTop="20dp"
-                    android:text="@string/player_b_name"
-                    android:theme="@style/TableHeader" />
+                    android:text="@string/player_b_name" />
+            </LinearLayout>
 
-
-                <LinearLayout
-                android:id="@+id/player_b_set"
+            <LinearLayout
+                android:id="@+id/player_a_set"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                    android:layout_weight="0"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="2dp"
+                android:layout_toEndOf="@id/tableHeader"
+                android:layout_toRightOf="@id/tableHeader"
                 android:orientation="horizontal">
 
                 <TextView
-                    style="@style/TableText"
+                    style="@style/TableTextXLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginStart="2dp"
+                    android:background="@drawable/border"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:paddingTop="2dp"
+                    android:text="0" />
+
+                <TextView
+                    style="@style/TableTextXLarge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
@@ -356,7 +283,7 @@
                     android:text="0" />
 
                 <TextView
-                    style="@style/TableText"
+                    style="@style/TableTextXLarge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
@@ -368,7 +295,7 @@
                     android:text="0" />
 
                 <TextView
-                    style="@style/TableText"
+                    style="@style/TableTextXLarge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
@@ -380,19 +307,7 @@
                     android:text="0" />
 
                 <TextView
-                    style="@style/TableText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:background="@drawable/border"
-                    android:paddingBottom="2dp"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:paddingTop="2dp"
-                    android:text="0" />
-
-                <TextView
-                    style="@style/TableText"
+                    style="@style/TableTextXLarge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
@@ -403,7 +318,76 @@
                     android:paddingTop="2dp"
                     android:text="0" />
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/player_b_set"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/player_a_set"
+                android:layout_toEndOf="@id/tableHeader"
+                android:layout_toRightOf="@id/tableHeader"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TableTextXLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:background="@drawable/border"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:paddingTop="2dp"
+                    android:text="0" />
+
+                <TextView
+                    style="@style/TableTextXLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:background="@drawable/border"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:paddingTop="2dp"
+                    android:text="0" />
+
+                <TextView
+                    style="@style/TableTextXLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:background="@drawable/border"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:paddingTop="2dp"
+                    android:text="0" />
+
+                <TextView
+                    style="@style/TableTextXLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="1dp"
+                    android:background="@drawable/border"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:paddingTop="2dp"
+                    android:text="0" />
+
+                <TextView
+                    style="@style/TableTextXLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:background="@drawable/border"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:paddingTop="2dp"
+                    android:text="0" />
             </LinearLayout>
-    </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

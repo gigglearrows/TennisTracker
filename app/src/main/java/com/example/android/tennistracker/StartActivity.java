@@ -34,6 +34,9 @@ public class StartActivity extends AppCompatActivity {
         editTextB.setFilters(new InputFilter[]{filter, new InputFilter.LengthFilter(35)});
     }
 
+    /**
+     * Starts the main activity
+     */
     public void goToMainActivity(View view) {
         String playerAName = editTextA.getText().toString();
         String playerBName = editTextB.getText().toString();
