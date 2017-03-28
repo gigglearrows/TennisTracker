@@ -1,0 +1,28 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="large_margin">20dp</dimen>
+    <dimen name="standard_margin">16dp</dimen>
+    <dimen name="small_margin">8dp</dimen>
+    <dimen name="smaller_margin">4dp</dimen>
+    <dimen name="smallest_margin">2dp</dimen>
+    <dimen name="tie_deuce_btn_margin">68dp</dimen>
+    <dimen name="btn_padding">44dp</dimen>
+
+    <dimen name="deuce_padding">16dp</dimen>
+    <dimen name="tiebreak_padding">16dp</dimen>
+    <dimen name="deuce_padding_top">8dp</dimen>
+    <dimen name="tiebreak_padding_top">8dp</dimen>
+    <dimen name="deuce_padding_bot">8dp</dimen>
+    <dimen name="tiebreak_padding_bot">8dp</dimen>
+
+    <dimen name="tableHPadding">8dp</dimen>
+    <dimen name="tableVPadding">2dp</dimen>
+
+    <dimen name="tieBreakText">24sp</dimen>
+    <dimen name="deuceText">24sp</dimen>
+    <dimen name="scoreText">64sp</dimen>
+    <dimen name="faultNameText">14sp</dimen>
+    <dimen name="headerText">16sp</dimen>
+    <dimen name="tableText">56sp</dimen>
+    <dimen name="player_name_text">18sp</dimen>
+</resources>

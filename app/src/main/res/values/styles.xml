@@ -12,96 +12,90 @@
 
     <style name="cardStyle" parent="CardView">
         <item name="cardBackgroundColor">#EFEBDF</item>
-        <item name="cardCornerRadius">2dp</item>
+        <item name="cardCornerRadius">@dimen/smallest_margin</item>
     </style>
 
     <style name="PlayerNameText">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/player_name_text</item>
         <item name="android:textColor">#cc2f3b37</item>
         <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
     <style name="ScoreText">
-        <item name="android:textSize">56sp</item>
+        <item name="android:textSize">@dimen/scoreText</item>
         <item name="android:textColor">#2f3b37</item>
         <item name="android:fontFamily">sans-serif-light</item>
     </style>
 
     <style name="FaultNameText">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/faultNameText</item>
         <item name="android:textColor">#bb2f3b37</item>
         <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
     <style name="TableHeader">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/headerText</item>
         <item name="android:textColor">#2f3b37</item>
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center_vertical|end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:background">@drawable/border</item>
+        <item name="android:paddingBottom">@dimen/large_margin</item>
+        <item name="android:paddingLeft">@dimen/tableHPadding</item>
+        <item name="android:paddingRight">@dimen/tableHPadding</item>
+        <item name="android:paddingTop">@dimen/large_margin</item>
     </style>
 
     <style name="TableText">
-        <item name="android:textSize">44sp</item>
+        <item name="android:textSize">@dimen/tableText</item>
         <item name="android:textColor">#2f3b37</item>
         <item name="android:fontFamily">sans-serif-light</item>
     </style>
 
     <style name="DeuceText">
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">@dimen/deuceText</item>
         <item name="android:textColor">#EFEBDF</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:paddingLeft">4dp</item>
-        <item name="android:paddingRight">4dp</item>
-        <item name="android:paddingTop">0dp</item>
-        <item name="android:paddingBottom">0dp</item>
+        <item name="android:paddingLeft">@dimen/deuce_padding</item>
+        <item name="android:paddingRight">@dimen/deuce_padding</item>
+        <item name="android:paddingTop">@dimen/deuce_padding_bot</item>
+        <item name="android:paddingBottom">@dimen/deuce_padding_top</item>
         <item name="android:background">@drawable/deuce_rounded_corner</item>
         <item name="android:fontFamily">sans-serif-light</item>
     </style>
 
     <style name="TieBreakText">
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">@dimen/tieBreakText</item>
         <item name="android:textColor">#2f3b37</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:paddingLeft">4dp</item>
-        <item name="android:paddingRight">4dp</item>
-        <item name="android:paddingTop">0dp</item>
-        <item name="android:paddingBottom">0dp</item>
+        <item name="android:paddingLeft">@dimen/tiebreak_padding</item>
+        <item name="android:paddingRight">@dimen/tiebreak_padding</item>
+        <item name="android:paddingTop">@dimen/tiebreak_padding_top</item>
+        <item name="android:paddingBottom">@dimen/tiebreak_padding_bot</item>
         <item name="android:background">@drawable/tiebreak_rounded_corner</item>
         <item name="android:fontFamily">sans-serif-light</item>
     </style>
 
     <style name="NormalBtn">
         <item name="android:textColor">#EFEBDF</item>
-        <item name="android:paddingLeft">16dp</item>
-        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingLeft">@dimen/btn_padding</item>
+        <item name="android:paddingRight">@dimen/btn_padding</item>
     </style>
 
     <style name="RedBtn">
         <item name="colorButtonNormal">#eed60000</item>
         <item name="android:textColor">#EFEBDF</item>
-        <item name="android:paddingLeft">16dp</item>
-        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingLeft">@dimen/btn_padding</item>
+        <item name="android:paddingRight">@dimen/btn_padding</item>
     </style>
 
     <style name="ResetBtn">
         <item name="colorButtonNormal">#2f3b37</item>
         <item name="android:textColor">#EFEBDF</item>
-        <item name="android:paddingLeft">16dp</item>
-        <item name="android:paddingRight">16dp</item>
-    </style>
-
-
-    <style name="TableHeaderXLarge">
-        <item name="android:textSize">34sp</item>
-        <item name="android:textColor">#2f3b37</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">sans-serif-light</item>
-    </style>
-
-    <style name="TableTextXLarge">
-        <item name="android:textSize">64sp</item>
-        <item name="android:textColor">#2f3b37</item>
-        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:paddingLeft">@dimen/btn_padding</item>
+        <item name="android:paddingRight">@dimen/btn_padding</item>
     </style>
 
 </resources>

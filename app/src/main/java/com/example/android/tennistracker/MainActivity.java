@@ -79,15 +79,16 @@ public class MainActivity extends AppCompatActivity {
         tableHeaderPlayerA = (TextView) findViewById(R.id.tableHeaderPlayerA);
         tableHeaderPlayerB = (TextView) findViewById(R.id.tableHeaderPlayerB);
 
-        tableHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 11, getResources().getDisplayMetrics());
-        int headerTextSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics());
-        tablePadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics());
-        tablePaddingV = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics());
-        int headerPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 6, getResources().getDisplayMetrics());
+        float SCREEN_DENSITY = getResources().getDisplayMetrics().density;
 
-        tableHeaderPlayerA.setTextSize(headerTextSize);
+        tableHeight = (int) getResources().getDimension(R.dimen.tableText);
+        tablePadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics());
+        tablePaddingV = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics());
+        int headerPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics());
+
+        tableHeaderPlayerA.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.headerText));
         tableHeaderPlayerA.setPadding(tablePadding, headerPadding, tablePadding, headerPadding);
-        tableHeaderPlayerB.setTextSize(headerTextSize);
+        tableHeaderPlayerB.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.headerText));
         tableHeaderPlayerB.setPadding(tablePadding, headerPadding, tablePadding, headerPadding);
 
 
@@ -155,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
             llp.setMargins(tablePaddingV, 0, 0, 0);
             textView.setLayoutParams(llp);
             textView.setPadding(tablePadding, tablePaddingV, tablePadding, tablePaddingV);
-            textView.setTextSize(tableHeight);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, tableHeight);
             if ((i > 5 && (i - setPlayerB.get(iNumber)) >= 2) || i == 7)
                 textView.setTypeface(null, Typeface.BOLD);
             textView.setText(String.valueOf(i));
@@ -287,7 +288,7 @@ public class MainActivity extends AppCompatActivity {
             llp.setMargins(tablePaddingV, 0, 0, 0);
             textView.setLayoutParams(llp);
             textView.setPadding(tablePadding, tablePaddingV, tablePadding, tablePaddingV);
-            textView.setTextSize(tableHeight);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, tableHeight);
             if ((i == 6 && (i - setPlayerA.get(iNumber)) >= 2) || i == 7)
                 textView.setTypeface(null, Typeface.BOLD);
             textView.setText(String.valueOf(i));
