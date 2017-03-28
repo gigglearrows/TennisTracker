@@ -7,10 +7,12 @@ import android.text.InputFilter;
 import android.text.Spanned;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
 
 public class StartActivity extends AppCompatActivity {
     private EditText editTextA;
     private EditText editTextB;
+    private int setsToWin = 3;
 
     private InputFilter filter = new InputFilter() {
         @Override
@@ -44,6 +46,25 @@ public class StartActivity extends AppCompatActivity {
         Intent mainAct = new Intent(this, MainActivity.class);
         mainAct.putExtra("playerAName", playerAName);
         mainAct.putExtra("playerBName", playerBName);
+        mainAct.putExtra("setsToWin", setsToWin);
         startActivity(mainAct);
+    }
+
+    /**
+     * When radiobutton is clicked. check which one and asign the right gamemode
+     */
+    public void onRadioButtonClicked(View view) {
+        boolean checked = ((RadioButton) view).isChecked();
+
+        switch (view.getId()) {
+            case R.id.radio_3games:
+                if (checked)
+                    setsToWin = 2;
+                break;
+            case R.id.radio_5games:
+                if (checked)
+                    setsToWin = 3;
+                break;
+        }
     }
 }

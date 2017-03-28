@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     int faultsPlayerB = 0;
     String playerAName;
     String playerBName;
-
     TextView playerANameLabel;
     TextView playerBNameLabel;
     TextView FaultViewB;
@@ -49,11 +48,10 @@ public class MainActivity extends AppCompatActivity {
     int tableHeight;
     int tablePadding;
     int tablePaddingV;
-
     boolean aHasTwoPointsMore = false;
     boolean bHasTwoSetsMore = false;
     boolean isTieBreak = false;
-
+    private int setsToWin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,8 +77,6 @@ public class MainActivity extends AppCompatActivity {
         tableHeaderPlayerA = (TextView) findViewById(R.id.tableHeaderPlayerA);
         tableHeaderPlayerB = (TextView) findViewById(R.id.tableHeaderPlayerB);
 
-        float SCREEN_DENSITY = getResources().getDisplayMetrics().density;
-
         tableHeight = (int) getResources().getDimension(R.dimen.tableText);
         tablePadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics());
         tablePaddingV = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics());
@@ -94,19 +90,24 @@ public class MainActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            if (!extras.getString("playerAName").isEmpty()) {
+            if (extras.containsKey("playerAName") && !extras.getString("playerAName").isEmpty()) {
                 playerAName = extras.getString("playerAName");
                 playerANameLabel.setText(playerAName);
                 ((TextView) findViewById(R.id.tableHeaderPlayerA)).setText(playerAName);
             } else {
                 playerAName = getString(R.string.player_a_name);
             }
-            if (!extras.getString("playerBName").isEmpty()) {
+            if (extras.containsKey("playerBName") && !extras.getString("playerBName").isEmpty()) {
                 playerBName = extras.getString("playerBName");
                 playerBNameLabel.setText(playerBName);
                 ((TextView) findViewById(R.id.tableHeaderPlayerB)).setText(playerBName);
             } else {
                 playerBName = getString(R.string.player_b_name);
+            }
+            if (extras.containsKey("setsToWin")) {
+                setsToWin = extras.getInt("setsToWin");
+            } else {
+                setsToWin = 3;
             }
         }
 
@@ -219,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
             setNum++;
             setPointsPlayerA++;
 
-            if (setPointsPlayerA < 3) {
+            if (setPointsPlayerA < setsToWin) {
                 setPlayerA.add(setNum, 0);
                 setPlayerB.add(setNum, 0);
                 displaySetForPlayerB(setPlayerB);
@@ -351,7 +352,7 @@ public class MainActivity extends AppCompatActivity {
             setNum++;
             setPointsPlayerB++;
 
-            if (setPointsPlayerB < 3) {
+            if (setPointsPlayerB < setsToWin) {
                 setPlayerB.add(setNum, 0);
                 setPlayerA.add(setNum, 0);
                 displaySetForPlayerA(setPlayerA);

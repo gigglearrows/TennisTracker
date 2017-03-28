@@ -25,4 +25,7 @@
     <dimen name="headerText">14sp</dimen>
     <dimen name="tableText">40sp</dimen>
     <dimen name="player_name_text">14sp</dimen>
+
+    <dimen name="VS_text">16sp</dimen>
+    <dimen name="player_name_header_start">20sp</dimen>
 </resources>

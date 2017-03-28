@@ -98,4 +98,9 @@
         <item name="android:paddingRight">@dimen/btn_padding</item>
     </style>
 
+    <style name="RadioBtn">
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:textColor">@color/dark</item>
+    </style>
+
 </resources>
