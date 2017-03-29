@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     int tableHeight;
     int tablePadding;
     int tablePaddingV;
-    boolean aHasTwoPointsMore = false;
+    boolean aHasTwoSetsMore = false;
     boolean bHasTwoSetsMore = false;
     boolean isTieBreak = false;
     private int setsToWin;
@@ -88,35 +88,89 @@ public class MainActivity extends AppCompatActivity {
         tableHeaderPlayerB.setPadding(tablePadding, headerPadding, tablePadding, headerPadding);
 
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            if (extras.containsKey("playerAName") && !extras.getString("playerAName").isEmpty()) {
-                playerAName = extras.getString("playerAName");
-                playerANameLabel.setText(playerAName);
-                ((TextView) findViewById(R.id.tableHeaderPlayerA)).setText(playerAName);
-            } else {
-                playerAName = getString(R.string.player_a_name);
+        // Check whether we're recreating a previously destroyed instance
+        if (savedInstanceState != null) {
+            // Restore value of members from saved state
+
+            pointsPlayerA = savedInstanceState.getInt("POINTS_PLAYER_A");
+            pointsPlayerB = savedInstanceState.getInt("POINTS_PLAYER_B");
+            setPointsPlayerA = savedInstanceState.getInt("SET_POINTS_PLAYER_A");
+            setPointsPlayerB = savedInstanceState.getInt("SET_POINTS_PLAYER_B");
+            setPlayerA = savedInstanceState.getIntegerArrayList("SET_ARRAY_PLAYER_A");
+            setPlayerB = savedInstanceState.getIntegerArrayList("SET_ARRAY_PLAYER_B");
+            setNum = savedInstanceState.getInt("SET_NUMBER");
+            faultsPlayerA = savedInstanceState.getInt("FAULTS_PLAYER_A");
+            faultsPlayerB = savedInstanceState.getInt("FAULTS_PLAYER_B");
+            playerAName = savedInstanceState.getString("PLAYER_A_NAME");
+            playerBName = savedInstanceState.getString("PLAYER_B_NAME");
+            aHasTwoSetsMore = savedInstanceState.getBoolean("A_HAS_TWO_SETS_MORE");
+            bHasTwoSetsMore = savedInstanceState.getBoolean("B_HAS_TWO_SETS_MORE");
+            isTieBreak = savedInstanceState.getBoolean("IS_TIEBREAK");
+            setsToWin = savedInstanceState.getInt("SETS_TO_WIN");
+
+            if (isTieBreak) changeToTieBreak();
+
+        } else {
+            // Probably initialize members with default values for a new instance
+            Bundle extras = getIntent().getExtras();
+            if (extras != null) {
+                if (extras.containsKey("playerAName") && !extras.getString("playerAName").isEmpty()) {
+                    playerAName = extras.getString("playerAName");
+                    playerANameLabel.setText(playerAName);
+                    ((TextView) findViewById(R.id.tableHeaderPlayerA)).setText(playerAName);
+                } else {
+                    playerAName = getString(R.string.player_a_name);
+                }
+                if (extras.containsKey("playerBName") && !extras.getString("playerBName").isEmpty()) {
+                    playerBName = extras.getString("playerBName");
+                    playerBNameLabel.setText(playerBName);
+                    ((TextView) findViewById(R.id.tableHeaderPlayerB)).setText(playerBName);
+                } else {
+                    playerBName = getString(R.string.player_b_name);
+                }
+                if (extras.containsKey("setsToWin")) {
+                    setsToWin = extras.getInt("setsToWin");
+                } else {
+                    setsToWin = 3;
+                }
             }
-            if (extras.containsKey("playerBName") && !extras.getString("playerBName").isEmpty()) {
-                playerBName = extras.getString("playerBName");
-                playerBNameLabel.setText(playerBName);
-                ((TextView) findViewById(R.id.tableHeaderPlayerB)).setText(playerBName);
-            } else {
-                playerBName = getString(R.string.player_b_name);
-            }
-            if (extras.containsKey("setsToWin")) {
-                setsToWin = extras.getInt("setsToWin");
-            } else {
-                setsToWin = 3;
-            }
+
+            setPlayerA.add(0);
+            setPlayerB.add(0);
         }
 
-        setPlayerA.add(0);
-        setPlayerB.add(0);
         displayForPlayerA(pointsPlayerA);
         displaySetForPlayerA(setPlayerA);
         displayForPlayerB(pointsPlayerB);
         displaySetForPlayerB(setPlayerB);
+        displayFaultA();
+        displayFaultB();
+    }
+
+    /**
+     * Save state so that variable is not reset on rotating screen
+     */
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        // Save the user's current game state
+        savedInstanceState.putInt("POINTS_PLAYER_A", pointsPlayerA);
+        savedInstanceState.putInt("POINTS_PLAYER_B", pointsPlayerB);
+        savedInstanceState.putInt("SET_POINTS_PLAYER_A", setPointsPlayerA);
+        savedInstanceState.putInt("SET_POINTS_PLAYER_B", setPointsPlayerB);
+        savedInstanceState.putIntegerArrayList("SET_ARRAY_PLAYER_A", setPlayerA);
+        savedInstanceState.putIntegerArrayList("SET_ARRAY_PLAYER_B", setPlayerB);
+        savedInstanceState.putInt("SET_NUMBER", setNum);
+        savedInstanceState.putInt("FAULTS_PLAYER_A", faultsPlayerA);
+        savedInstanceState.putInt("FAULTS_PLAYER_B", faultsPlayerB);
+        savedInstanceState.putString("PLAYER_A_NAME", playerAName);
+        savedInstanceState.putString("PLAYER_B_NAME", playerBName);
+        savedInstanceState.putBoolean("A_HAS_TWO_SETS_MORE", aHasTwoSetsMore);
+        savedInstanceState.putBoolean("B_HAS_TWO_SETS_MORE", bHasTwoSetsMore);
+        savedInstanceState.putBoolean("IS_TIEBREAK", isTieBreak);
+        savedInstanceState.putInt("SETS_TO_WIN", setsToWin);
+
+        // Always call the superclass so it can save the view hierarchy state
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     /**
@@ -214,9 +268,9 @@ public class MainActivity extends AppCompatActivity {
         Integer valueB = setPlayerB.get(setNum);
         value++;
         setPlayerA.set(setNum, value);
-        aHasTwoPointsMore = (value - valueB >= 2);
+        aHasTwoSetsMore = (value - valueB >= 2);
 
-        if ((value >= 6 && aHasTwoPointsMore) || isTieBreak) {
+        if ((value >= 6 && aHasTwoSetsMore) || isTieBreak) {
             setNum++;
             setPointsPlayerA++;
 
@@ -236,16 +290,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Displays faults for player A.
+     */
+    public void displayFaultA() {
+        if (faultsPlayerB < 1) {
+            if (faultsPlayerA == 1)
+                FaultViewA.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.x, 0);
+            else if (faultsPlayerA == 2)
+                FaultViewA.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+        }
+    }
+
+    /**
      * Adds fault to player A. Displays icon if 1 fault, removes it if 2 faults
      * and gives point to player B.
      */
     public void addFaultA(View v) {
         if (faultsPlayerB < 1) {
             faultsPlayerA += 1;
-            FaultViewA.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.x, 0);
+            displayFaultA();
 
             if (faultsPlayerA == 2) {
-                FaultViewA.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
                 faultsPlayerA = 0;
                 addPointB(v);
             }
@@ -368,16 +433,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Displays faults for player B.
+     */
+    public void displayFaultB() {
+        if (faultsPlayerA < 1) {
+            if (faultsPlayerB == 1)
+                FaultViewB.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.x, 0);
+
+            if (faultsPlayerB == 2)
+                FaultViewB.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+        }
+    }
+
+    /**
      * Adds fault to player B. Displays icon if 1 fault, removes it if 2 faults
      * and gives point to player A.
      */
     public void addFaultB(View v) {
         if (faultsPlayerA < 1) {
             faultsPlayerB += 1;
-            FaultViewB.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.x, 0);
+            displayFaultB();
 
             if (faultsPlayerB == 2) {
-                FaultViewB.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
                 faultsPlayerB = 0;
                 addPointA(v);
             }

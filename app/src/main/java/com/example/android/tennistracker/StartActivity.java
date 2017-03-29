@@ -34,6 +34,15 @@ public class StartActivity extends AppCompatActivity {
         editTextA.setFilters(new InputFilter[]{filter, new InputFilter.LengthFilter(35)});
         editTextB = (EditText) findViewById(R.id.player_b_name);
         editTextB.setFilters(new InputFilter[]{filter, new InputFilter.LengthFilter(35)});
+
+        // Check whether we're recreating a previously destroyed instance
+        if (savedInstanceState != null) {
+            // Restore value of members from saved state
+            setsToWin = savedInstanceState.getInt("SETS_TO_WIN");
+        } else {
+            // Probably initialize members with default values for a new instance
+            setsToWin = 3;
+        }
     }
 
     /**
@@ -66,5 +75,17 @@ public class StartActivity extends AppCompatActivity {
                     setsToWin = 3;
                 break;
         }
+    }
+
+    /**
+     * Save state so that variable is not reset on rotating screen
+     */
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        // Save the user's current game state
+        savedInstanceState.putInt("SETS_TO_WIN", setsToWin);
+
+        // Always call the superclass so it can save the view hierarchy state
+        super.onSaveInstanceState(savedInstanceState);
     }
 }
