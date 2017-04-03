@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     int tableHeight;
     int tablePadding;
     int tablePaddingV;
+    int tablePaddingVLand;
     boolean aHasTwoSetsMore = false;
     boolean bHasTwoSetsMore = false;
     boolean isTieBreak = false;
@@ -74,19 +75,31 @@ public class MainActivity extends AppCompatActivity {
         tieBreakView = (TextView) findViewById(R.id.tiebreak_text);
         cardViewA = (CardView) findViewById(R.id.card_viewA);
         cardViewB = (CardView) findViewById(R.id.card_viewB);
-        tableHeaderPlayerA = (TextView) findViewById(R.id.tableHeaderPlayerA);
-        tableHeaderPlayerB = (TextView) findViewById(R.id.tableHeaderPlayerB);
 
+        // Here we check if its in landscape mode and if its a tablet
+        int orientationMode = getResources().getConfiguration().orientation;
+        boolean isTablet = getResources().getBoolean(R.bool.isTablet);
+
+        //Values to calculate table padding/margins and textsize
         tableHeight = (int) getResources().getDimension(R.dimen.tableText);
         tablePadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics());
         tablePaddingV = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics());
-        int headerPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics());
 
-        tableHeaderPlayerA.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.headerText));
-        tableHeaderPlayerA.setPadding(tablePadding, headerPadding, tablePadding, headerPadding);
-        tableHeaderPlayerB.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.headerText));
-        tableHeaderPlayerB.setPadding(tablePadding, headerPadding, tablePadding, headerPadding);
+        // Settings values based on landscape mode or if tablet or not.
+        if (orientationMode == 2 && !isTablet) {
+            tablePaddingVLand = tablePaddingV;
+            tablePaddingV = 0;
+        } else {
+            tableHeaderPlayerA = (TextView) findViewById(R.id.tableHeaderPlayerA);
+            tableHeaderPlayerB = (TextView) findViewById(R.id.tableHeaderPlayerB);
+            tablePaddingVLand = 0;
+            int headerPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics());
 
+            tableHeaderPlayerA.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.headerText));
+            tableHeaderPlayerA.setPadding(tablePadding, headerPadding, tablePadding, headerPadding);
+            tableHeaderPlayerB.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.headerText));
+            tableHeaderPlayerB.setPadding(tablePadding, headerPadding, tablePadding, headerPadding);
+        }
 
         // Check whether we're recreating a previously destroyed instance
         if (savedInstanceState != null) {
@@ -117,14 +130,14 @@ public class MainActivity extends AppCompatActivity {
                 if (extras.containsKey("playerAName") && !extras.getString("playerAName").isEmpty()) {
                     playerAName = extras.getString("playerAName");
                     playerANameLabel.setText(playerAName);
-                    ((TextView) findViewById(R.id.tableHeaderPlayerA)).setText(playerAName);
+                    if (orientationMode == 1 || isTablet) tableHeaderPlayerA.setText(playerAName);
                 } else {
                     playerAName = getString(R.string.player_a_name);
                 }
                 if (extras.containsKey("playerBName") && !extras.getString("playerBName").isEmpty()) {
                     playerBName = extras.getString("playerBName");
                     playerBNameLabel.setText(playerBName);
-                    ((TextView) findViewById(R.id.tableHeaderPlayerB)).setText(playerBName);
+                    if (orientationMode == 1 || isTablet) tableHeaderPlayerB.setText(playerBName);
                 } else {
                     playerBName = getString(R.string.player_b_name);
                 }
@@ -208,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
             LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT);
-            llp.setMargins(tablePaddingV, 0, 0, 0);
+            llp.setMargins(tablePaddingV, tablePaddingVLand, 0, 0);
             textView.setLayoutParams(llp);
             textView.setPadding(tablePadding, tablePaddingV, tablePadding, tablePaddingV);
             textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, tableHeight);
@@ -351,7 +364,7 @@ public class MainActivity extends AppCompatActivity {
             LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT);
-            llp.setMargins(tablePaddingV, 0, 0, 0);
+            llp.setMargins(tablePaddingV, tablePaddingVLand, 0, 0);
             textView.setLayoutParams(llp);
             textView.setPadding(tablePadding, tablePaddingV, tablePadding, tablePaddingV);
             textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, tableHeight);

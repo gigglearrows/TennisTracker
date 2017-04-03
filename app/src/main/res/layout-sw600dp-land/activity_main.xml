@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#232323"
+    tools:context="com.example.android.tennistracker.MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:alpha="0.5"
+        android:scaleType="centerCrop"
+        android:src="@drawable/main_bg" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_viewA"
+            style="@style/cardStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/smaller_margin"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/smaller_margin"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_weight="1"
+            card_view:contentPadding="@dimen/standard_margin">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/player_a_name_main"
+                    style="@style/PlayerNameText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:ellipsize="end"
+                    android:maxEms="10"
+                    android:maxLines="1"
+                    android:paddingBottom="@dimen/small_margin"
+                    android:text="@string/player_a_name" />
+
+                <TextView
+                    android:id="@+id/player_a_score"
+                    style="@style/ScoreText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingBottom="@dimen/smaller_margin"
+                    android:text="@string/zero" />
+
+                <TextView
+                    android:id="@+id/player_a_fault"
+                    style="@style/FaultNameText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/small_margin"
+                    android:text="@string/fault_label" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:onClick="addPointA"
+                    android:text="@string/pointBtn_label"
+                    android:theme="@style/NormalBtn" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/smaller_margin"
+
+                    android:onClick="addFaultA"
+                    android:text="@string/faultBtn_label"
+                    android:theme="@style/RedBtn" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_viewB"
+            style="@style/cardStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:layout_marginLeft="@dimen/smaller_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginStart="@dimen/smaller_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_weight="1"
+            card_view:contentPadding="@dimen/standard_margin">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/player_b_name_main"
+                    style="@style/PlayerNameText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:ellipsize="end"
+                    android:maxEms="11"
+                    android:maxLines="1"
+                    android:paddingBottom="@dimen/small_margin"
+                    android:text="@string/player_b_name" />
+
+                <TextView
+                    android:id="@+id/player_b_score"
+                    style="@style/ScoreText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingBottom="@dimen/smaller_margin"
+                    android:text="@string/zero" />
+
+                <TextView
+                    android:id="@+id/player_b_fault"
+                    style="@style/FaultNameText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/small_margin"
+                    android:text="@string/fault_label" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:onClick="addPointB"
+                    android:text="@string/pointBtn_label"
+                    android:theme="@style/NormalBtn" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/smaller_margin"
+                    android:onClick="addFaultB"
+                    android:text="@string/faultBtn_label"
+                    android:theme="@style/RedBtn" />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/deuce_text"
+        style="@style/DeuceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/tie_deuce_btn_margin"
+        android:text="@string/deuce_label"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tiebreak_text"
+        style="@style/TieBreakText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/tie_deuce_btn_margin"
+        android:text="@string/tiebreak_label"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/reset_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/standard_margin"
+        android:onClick="resetBtn"
+        android:text="@string/resetBtn_label"
+        android:theme="@style/ResetBtn" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/reset_btn"
+        android:layout_below="@id/linearLayout"
+        android:layout_marginLeft="@dimen/tableHPadding"
+        android:layout_marginRight="@dimen/tableHPadding"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/smaller_margin">
+
+        <LinearLayout
+            android:id="@+id/table"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/tableHeaderA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/tableVPadding"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tableHeaderPlayerA"
+                    style="@style/TableHeader"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:maxEms="8"
+                    android:text="@string/player_a_name" />
+
+                <LinearLayout
+                    android:id="@+id/player_a_set"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TableText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/tableVPadding"
+                        android:layout_marginStart="@dimen/tableVPadding"
+                        android:background="@drawable/border"
+                        android:paddingBottom="@dimen/tableVPadding"
+                        android:paddingLeft="@dimen/tableHPadding"
+                        android:paddingRight="@dimen/tableHPadding"
+                        android:paddingTop="@dimen/tableVPadding"
+                        android:text="0" />
+
+                    <TextView
+                        style="@style/TableText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/tableVPadding"
+                        android:layout_marginStart="@dimen/tableVPadding"
+                        android:background="@drawable/border"
+                        android:paddingBottom="@dimen/tableVPadding"
+                        android:paddingLeft="@dimen/tableHPadding"
+                        android:paddingRight="@dimen/tableHPadding"
+                        android:paddingTop="@dimen/tableVPadding"
+                        android:text="0" />
+
+                    <TextView
+                        style="@style/TableText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/tableVPadding"
+                        android:layout_marginStart="@dimen/tableVPadding"
+                        android:background="@drawable/border"
+                        android:paddingBottom="@dimen/tableVPadding"
+                        android:paddingLeft="@dimen/tableHPadding"
+                        android:paddingRight="@dimen/tableHPadding"
+                        android:paddingTop="@dimen/tableVPadding"
+                        android:text="0" />
+
+                    <TextView
+                        style="@style/TableText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/tableVPadding"
+                        android:layout_marginStart="@dimen/tableVPadding"
+                        android:background="@drawable/border"
+                        android:paddingBottom="@dimen/tableVPadding"
+                        android:paddingLeft="@dimen/tableHPadding"
+                        android:paddingRight="@dimen/tableHPadding"
+                        android:paddingTop="@dimen/tableVPadding"
+                        android:text="0" />
+
+                    <TextView
+                        style="@style/TableText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/tableVPadding"
+                        android:layout_marginStart="@dimen/tableVPadding"
+                        android:background="@drawable/border"
+                        android:paddingBottom="@dimen/tableVPadding"
+                        android:paddingLeft="@dimen/tableHPadding"
+                        android:paddingRight="@dimen/tableHPadding"
+                        android:paddingTop="@dimen/tableVPadding"
+                        android:text="0" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tableHeaderB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tableHeaderPlayerB"
+                    style="@style/TableHeader"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:maxEms="8"
+                    android:text="@string/player_b_name" />
+
+                <LinearLayout
+                    android:id="@+id/player_b_set"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TableText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/tableVPadding"
+                        android:background="@drawable/border"
+                        android:paddingBottom="@dimen/tableVPadding"
+                        android:paddingLeft="@dimen/tableHPadding"
+                        android:paddingRight="@dimen/tableHPadding"
+                        android:paddingTop="@dimen/tableVPadding"
+                        android:text="0" />
+
+                    <TextView
+                        style="@style/TableText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/tableVPadding"
+                        android:background="@drawable/border"
+                        android:paddingBottom="@dimen/tableVPadding"
+                        android:paddingLeft="@dimen/tableHPadding"
+                        android:paddingRight="@dimen/tableHPadding"
+                        android:paddingTop="@dimen/tableVPadding"
+                        android:text="0" />
+
+                    <TextView
+                        style="@style/TableText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/tableVPadding"
+                        android:background="@drawable/border"
+                        android:paddingBottom="@dimen/tableVPadding"
+                        android:paddingLeft="@dimen/tableHPadding"
+                        android:paddingRight="@dimen/tableHPadding"
+                        android:paddingTop="@dimen/tableVPadding"
+                        android:text="0" />
+
+                    <TextView
+                        style="@style/TableText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/tableVPadding"
+                        android:background="@drawable/border"
+                        android:paddingBottom="@dimen/tableVPadding"
+                        android:paddingLeft="@dimen/tableHPadding"
+                        android:paddingRight="@dimen/tableHPadding"
+                        android:paddingTop="@dimen/tableVPadding"
+                        android:text="0" />
+
+                    <TextView
+                        style="@style/TableText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/tableVPadding"
+                        android:background="@drawable/border"
+                        android:paddingBottom="@dimen/tableVPadding"
+                        android:paddingLeft="@dimen/tableHPadding"
+                        android:paddingRight="@dimen/tableHPadding"
+                        android:paddingTop="@dimen/tableVPadding"
+                        android:text="0" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
