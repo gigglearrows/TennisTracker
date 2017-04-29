@@ -2,22 +2,25 @@
     <string name="app_name">Tennis Tracker</string>
     <string name="player_a_name">Player A</string>
     <string name="player_b_name">Player B</string>
-    <string name="zero">0</string>
+    <string name="zero" translatable="false">0</string>
     <string name="fault_label">Fault: </string>
     <string name="pointBtn_label">Point</string>
     <string name="faultBtn_label">Fault</string>
     <string name="resetBtn_label">Reset</string>
-    <string name="advantage_msg">Adv</string>
+    <string name="advantage_msg" translatable="false">Adv</string>
     <string name="setPoint_msg">wins set</string>
     <string name="matchPoint_msg_1">wins</string>
     <string name="matchPoint_msg_2">against</string>
     <string name="matchPoint_title">Match is over!</string>
-    <string name="deuce_label">Deuce</string>
+    <string name="deuce_label" translatable="false">Deuce</string>
     <string name="enter_names_header">Enter player names</string>
     <string name="hint_playerA">Player A</string>
     <string name="hint_playerB">Player B</string>
     <string name="btn_confirm">Confirm</string>
-    <string name="tiebreak_label">Tiebreak</string>
+    <string name="tiebreak_label" translatable="false">Tiebreak</string>
     <string name="best3games_label">Best of 3</string>
     <string name="best5games_label">Best of 5</string>
+    <string name="newgame_label">New Game</string>
+    <string name="quit_label">Back</string>
+    <string name="saved_matches_option">Saved matches</string>
 </resources>

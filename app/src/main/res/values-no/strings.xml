@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tennis Tracker</string>
+    <string name="best3games_label">Best av 3</string>
+    <string name="best5games_label">Best av 5</string>
+    <string name="btn_confirm">Bekreft</string>
+    <string name="enter_names_header">Skriv inn spillernes navn</string>
+    <string name="faultBtn_label">Feil</string>
+    <string name="fault_label">Feil:</string>
+    <string name="hint_playerA">Spiller A</string>
+    <string name="hint_playerB">Spiller B</string>
+    <string name="matchPoint_msg_1">vinner</string>
+    <string name="matchPoint_msg_2">mot</string>
+    <string name="matchPoint_title">Kampen er over!</string>
+    <string name="player_a_name">Spiller A</string>
+    <string name="player_b_name">Spiller B</string>
+    <string name="pointBtn_label">Poeng</string>
+    <string name="resetBtn_label">Nullstill</string>
+    <string name="setPoint_msg">vinner sett</string>
+    <string name="newgame_label">Ny Kamp</string>
+    <string name="quit_label">Tilbake</string>
+    <string name="saved_matches_option">Lagrede kamper</string>
+</resources>

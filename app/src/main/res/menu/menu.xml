@@ -1,0 +1,8 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/saved_matches_option"
+        android:icon="@drawable/save_games_icon"
+        android:title="@string/saved_matches_option"
+        app:showAsAction="always" />
+</menu>

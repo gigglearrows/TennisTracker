@@ -8,8 +8,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.CardView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -52,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     boolean aHasTwoSetsMore = false;
     boolean bHasTwoSetsMore = false;
     boolean isTieBreak = false;
+    DatabaseHandler dataBase;
     private int setsToWin;
 
     @Override
@@ -100,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
             tableHeaderPlayerB.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.headerText));
             tableHeaderPlayerB.setPadding(tablePadding, headerPadding, tablePadding, headerPadding);
         }
+        //Databasehandler
+        dataBase = new DatabaseHandler(MainActivity.this);
 
         // Check whether we're recreating a previously destroyed instance
         if (savedInstanceState != null) {
@@ -158,6 +164,47 @@ public class MainActivity extends AppCompatActivity {
         displaySetForPlayerB(setPlayerB);
         displayFaultA();
         displayFaultB();
+    }
+
+    /**
+     * Add the options menu
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.saved_matches_option:
+                // User chose the "Saved matches" item
+                AlertDialog.Builder winDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+                ArrayList<String[]> arrOutput = dataBase.getAllMatches();
+                String stringOut = "";
+                for (String dbString[] : arrOutput) {
+                    stringOut += TextUtils.join(", ", dbString) + "\n";
+                }
+
+                winDialogBuilder.setCancelable(false)
+                        .setTitle(getString(R.string.matchPoint_title))
+                        .setMessage(stringOut)
+                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Log.v(TAG, "ok btn clicked");
+                            }
+                        });
+                AlertDialog winDialog = winDialogBuilder.create();
+                winDialog.show();
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     /**
@@ -481,17 +528,23 @@ public class MainActivity extends AppCompatActivity {
      */
     private void matchWin(String winMessage) {
         Log.i(TAG, "END of game");
+
+        // Database add match
+        dataBase.addMatch(true, playerAName, setPlayerA, setPointsPlayerA, playerBName, setPlayerB, setPointsPlayerB);
+
+        Log.d(TAG, "ADDED TO DATABASE: 1, " + playerAName + ", " + setPlayerA + ", " + setPointsPlayerA + ", " + playerBName + ", " + setPlayerB + ", " + setPointsPlayerB);
+
         AlertDialog.Builder winDialogBuilder = new AlertDialog.Builder(MainActivity.this);
         winDialogBuilder.setCancelable(false)
                 .setTitle(getString(R.string.matchPoint_title))
                 .setMessage(winMessage)
-                .setPositiveButton("Quit", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.quit_label, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         finish();
                     }
                 })
-                .setNegativeButton("New Game", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.newgame_label, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         reset();
