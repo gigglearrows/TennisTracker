@@ -8,11 +8,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.CardView;
-import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -55,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     boolean aHasTwoSetsMore = false;
     boolean bHasTwoSetsMore = false;
     boolean isTieBreak = false;
-    DatabaseHandler dataBase;
+    //DatabaseHandler dataBase;
     private int setsToWin;
 
     @Override
@@ -105,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
             tableHeaderPlayerB.setPadding(tablePadding, headerPadding, tablePadding, headerPadding);
         }
         //Databasehandler
-        dataBase = new DatabaseHandler(MainActivity.this);
+        //dataBase = new DatabaseHandler(MainActivity.this);
 
         // Check whether we're recreating a previously destroyed instance
         if (savedInstanceState != null) {
@@ -168,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Add the options menu
-     */
+     *//*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -205,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
         }
-    }
+    }*/
 
     /**
      * Save state so that variable is not reset on rotating screen
@@ -530,9 +527,9 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "END of game");
 
         // Database add match
-        dataBase.addMatch(true, playerAName, setPlayerA, setPointsPlayerA, playerBName, setPlayerB, setPointsPlayerB);
+        //dataBase.addMatch(true, playerAName, setPlayerA, setPointsPlayerA, playerBName, setPlayerB, setPointsPlayerB);
 
-        Log.d(TAG, "ADDED TO DATABASE: 1, " + playerAName + ", " + setPlayerA + ", " + setPointsPlayerA + ", " + playerBName + ", " + setPlayerB + ", " + setPointsPlayerB);
+        //Log.d(TAG, "ADDED TO DATABASE: 1, " + playerAName + ", " + setPlayerA + ", " + setPointsPlayerA + ", " + playerBName + ", " + setPlayerB + ", " + setPointsPlayerB);
 
         AlertDialog.Builder winDialogBuilder = new AlertDialog.Builder(MainActivity.this);
         winDialogBuilder.setCancelable(false)
