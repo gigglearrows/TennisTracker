@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<String[]> arrOutput = dataBase.getAllMatches();
                 String stringOut = "";
                 for (String dbString[] : arrOutput) {
-                    stringOut += TextUtils.join(", ", dbString) + "\n";
+                    stringOut += TextUtils.join(", ", dbString) + "\n\n";
                 }
 
                 winDialogBuilder.setCancelable(false)
